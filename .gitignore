@@ -1,2 +1,10 @@
+## global
 node_modules
-/backend/uploads/
+.env
+*.p8
+
+## backend
+/backend/uploads/*
+!/backend/uploads/index.html
+
+## frontend
