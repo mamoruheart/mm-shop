@@ -17,21 +17,23 @@ export const TITLES = [
 ];
 
 export const customerState = ["Customer", "Admin", "Suspended"];
+
 export const BACKEND_URL = "";
 
-export const UPLOAD_URI = BACKEND_URL + "/uploads/";
+export const UPLOAD_URI = `${BACKEND_URL}/uploads/`;
+
 export const CONTACT = {
-  phone: "+1 (888) 614 1990",
-  email: "eatingmonter@food.eat",
-  address: "California Los Angeles 98765",
-  name: "Food Seller"
+  phone: "",
+  email: "",
+  address: "",
+  name: ""
 };
 
 export const NEW_PRODUCT = {
-  title: `MICHAEL'S MACHINES`,
-  name: `MICHAEL'S MACHINES SANDWITCH`,
-  description: `5.56x45MM/308 BELT FED-BLACK`,
-  price: `$12, 000`
+  title: "",
+  name: "",
+  description: "",
+  price: ""
 };
 
 export const GOOGLE_CLIENT_ID = "";
