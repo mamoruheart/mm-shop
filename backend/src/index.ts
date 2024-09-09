@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import path from "path";
 import cors from "cors";
 import dotenv from "dotenv";
-// import bodyParser from "body-parser";
 import session from "express-session";
 import passport from "passport";
 
