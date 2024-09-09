@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 /* header part */
-.header-h {
-  height: 70vh;
+.header-h{
+    height:70vh
 }

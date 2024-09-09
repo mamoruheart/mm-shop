@@ -1,11 +1,2 @@
-## global
 node_modules
-.env
-*.p8
-
-## backend
-/backend/uploads/*
-!/backend/uploads/index.html
-
-## frontend
-/frontend/src/constant.ts
+/backend/uploads/

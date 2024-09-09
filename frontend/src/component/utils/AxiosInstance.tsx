@@ -1,31 +1,32 @@
-import axios from "axios";
-import Cookies from "js-cookie";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
-type NavigateFunction = (path: string) => void;
+export const createAxiosInstance = (navigate) => {
 
-export const createAxiosInstance = (navigate: NavigateFunction) => {
   const axiosInstance = axios.create({
-    baseURL: "/api",
+    baseURL: '/api', // Replace with your API base URL
     headers: {
-      Authorization: `Bearer ${Cookies.get("authToken")}`
+      Authorization: `Bearer ${Cookies.get('authToken')}`
     }
   });
-
-  //-- Add a request interceptor to include the token in headers
+  
+  // Add a request interceptor to include the token in headers
   axiosInstance.interceptors.response.use(
-    (response) => {
+    response => {
       console.log();
       return response;
-    },
-    (error) => {
-      console.log("axios Instance Error");
+    }
+    ,
+    error => {
+      console.log('axios Instance Error')
       if (error.response && error.response.status === 403) {
-        //-- Redirect to logout if user is unauthorized (cookie expired)
-        navigate("/logout");
+        // Redirect to logout if user is unauthorized (cookie expired)
+        navigate('/logout');
       }
-      return Promise.reject(error);
+      return Promise.reject(error); // Pass through other errors
     }
   );
-
+  
+  
   return axiosInstance;
-};
+}

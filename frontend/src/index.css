@@ -4,16 +4,16 @@
 
 /* extra fonts */
 html {
-  background-color: #f8f8fa;
+    background-color: #f8f8fa;
 }
 
-.badge-after {
-  font-size: 13px;
-  font-weight: 700;
-  position: absolute;
-  border: solid #f94316;
-  border-radius: 50%;
-  height: 25px;
-  width: 25px;
-  background: #f94316;
-}
+.badge-after{
+    font-size: 13px;
+    font-weight: 700;
+    position: absolute;
+    border: solid #f94316;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    background:#f94316;
+    }
