@@ -5,8 +5,9 @@ const ProductController_1 = require("../controllers/ProductController");
 const multer_1 = require("../config/multer");
 const AuthMiddleware_1 = require("../middleware/AuthMiddleware");
 const router = (0, express_1.Router)();
-router.get('/', ProductController_1.get_product);
-router.post('/', multer_1.upload.array('files', 20), AuthMiddleware_1.AuthMiddleware, ProductController_1.post_product);
-router.put('/:id', multer_1.upload.array('files', 20), AuthMiddleware_1.AuthMiddleware, ProductController_1.update_product);
-router.delete('/:id', AuthMiddleware_1.AuthMiddleware, ProductController_1.delete_product);
+router.get("/", ProductController_1.get_product);
+router.post("/", multer_1.upload.array("files", 20), AuthMiddleware_1.AuthMiddleware, ProductController_1.post_product);
+router.put("/:id", multer_1.upload.array("files", 20), AuthMiddleware_1.AuthMiddleware, ProductController_1.update_product);
+router.delete("/:id", AuthMiddleware_1.AuthMiddleware, ProductController_1.delete_product);
 exports.default = router;
+//# sourceMappingURL=product.js.map

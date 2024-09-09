@@ -6,20 +6,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthMiddleware = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const AuthMiddleware = (req, res, next) => {
-    const bearerHeader = req.headers['authorization'];
+    const bearerHeader = req.headers["authorization"];
     console.log(bearerHeader);
-    if (typeof bearerHeader !== 'undefined') {
-        const bearerToken = bearerHeader.split(' ')[1];
+    if (typeof bearerHeader !== "undefined") {
+        const bearerToken = bearerHeader.split(" ")[1];
         jsonwebtoken_1.default.verify(bearerToken, process.env.JWT_SECRET, (err, authData) => {
             console.log(!!err);
             if (!!err) {
-                res.status(403).json({ msg: 'Cookie expired' });
+                res.status(403).json({ msg: "Cookie expired" });
             }
             else {
                 if (authData)
                     next();
                 else
-                    res.status(401).json({ msg: 'You are not logged in' });
+                    res.status(401).json({ msg: "You are not logged in" });
             }
         });
     }
@@ -27,3 +27,4 @@ const AuthMiddleware = (req, res, next) => {
         res.status(401);
 };
 exports.AuthMiddleware = AuthMiddleware;
+//# sourceMappingURL=AuthMiddleware.js.map

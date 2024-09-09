@@ -42,8 +42,6 @@ export const get_product = (req: Request, res: Response) => {
 };
 
 export const post_product = (req: Request, res: Response) => {
-  console.log("aaaaaaaaaasdfsadf");
-
   const newData = parseRequest(req);
   const newProduct = new Product(newData);
   console.log(newProduct);

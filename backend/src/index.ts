@@ -12,7 +12,9 @@ import categoryRouter from "./route/category";
 import customerRouter from "./route/customer";
 import orderRouter from "./route/order";
 
-dotenv.config();
+dotenv.config({
+  path: path.resolve(__dirname, "..", ".env")
+});
 
 const app = express();
 
@@ -36,7 +38,6 @@ app.use("/customer", customerRouter);
 app.use("/order", orderRouter);
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
-//-- used in production to serve client files
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
@@ -44,14 +45,16 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-//-- connecting to mongoDB and then running server on port 4000
-const dbURI = process.env.dbURI;
+const dbURI =
+  process.env.NODE_ENV === "production"
+    ? process.env.dbURI
+    : "mongodb://127.0.0.1:27017/mmshop";
 const port = process.env.PORT || 3000;
-console.log(dbURI);
+
 mongoose
   .connect(dbURI!)
-  .then((res) => app.listen(port))
-  .catch((err) => console.log(err));
-
-console.log(`Server is on port ${port}`);
-console.log(`mongodb connected`);
+  .then((res) => {
+    console.log("MongoDB connected:", dbURI);
+    app.listen(port, () => console.log("Server is running on port", port));
+  })
+  .catch((err) => console.log("Failed to connect MongoDB:", err));

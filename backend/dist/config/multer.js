@@ -8,12 +8,13 @@ const multer_1 = __importDefault(require("multer"));
 const path_1 = __importDefault(require("path"));
 const uuid_1 = require("uuid");
 const storage = multer_1.default.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/'); // Destination folder where files will be stored
+    destination: (req, file, cb) => {
+        cb(null, "uploads/");
     },
-    filename: function (req, file, cb) {
+    filename: (req, file, cb) => {
         const uniqueName = (0, uuid_1.v4)() + path_1.default.extname(file.originalname);
-        cb(null, uniqueName); // File name format
+        cb(null, uniqueName); //-- File name format
     }
 });
 exports.upload = (0, multer_1.default)({ storage });
+//# sourceMappingURL=multer.js.map

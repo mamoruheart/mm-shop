@@ -1,10 +1,10 @@
 {
   "name": "mm-shop",
   "version": "1.1.0",
-  "description": "slience is gold",
+  "description": "silence is gold",
   "scripts": {
-    "server": "cd backend & nodemon",
-    "client": "cd frontend & npm run dev",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "devDependencies": {

@@ -20,12 +20,12 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, email, password, phone } = req.body;
         if (!name || !email || !password) {
-            res.status(400).json({ msg: "Please enter all fields" });
+            res.status(400).json({ msg: "Please enter mandatory fields" });
             return;
         }
-        user_1.default.findOne({ email }).then(user => {
+        user_1.default.findOne({ email }).then((user) => {
             if (user)
-                return res.status(400).json({ msg: 'User already exists' });
+                return res.status(400).json({ msg: "User already exists" });
             const newUser = new user_1.default({
                 name,
                 email,
@@ -33,7 +33,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 phone,
                 state: 0
             });
-            //create salt and hash
+            //-- create salt and hash
             bcrypt_1.default.genSalt(10, (err, salt) => {
                 bcrypt_1.default.hash(password, salt, (err, hash) => {
                     if (err)
@@ -63,12 +63,12 @@ const login = (req, res) => {
     console.log(req.body);
     const { email, password } = req.body;
     if (!email || !password) {
-        res.status(400).json({ msg: 'Please type in all the data' });
+        res.status(400).json({ msg: "Please type in all the data" });
         return;
     }
     user_1.default.findOne({ email }).then((user) => {
         if (!user || user == null) {
-            res.status(400).json({ msg: 'Invalid email or password' });
+            res.status(400).json({ msg: "Invalid email or password" });
             return;
         }
         bcrypt_1.default.compare(password, user.password).then((isMatch) => {
@@ -88,7 +88,7 @@ const login = (req, res) => {
                     });
                 });
             else
-                res.status(403).json({ msg: 'Invalid Password' });
+                res.status(403).json({ msg: "Invalid Password" });
         });
     });
 };
@@ -97,28 +97,31 @@ const changeInfo = (req, res) => {
     const { fname, lname, email, phone, password, passwordConfirm } = req.body;
     console.log(email);
     if (!email || !fname || !lname || !phone || !password || !passwordConfirm) {
-        res.status(400).json({ msg: 'Please type in all the data' });
+        res.status(400).json({ msg: "Please type in all the data" });
         return;
     }
     user_1.default.findOne({ email }).then((user) => {
         console.log(user);
         if (!user || user == null) {
-            res.status(400).json({ msg: 'Invalid email or password' });
+            res.status(400).json({ msg: "Invalid email or password" });
             return;
         }
         if (password !== passwordConfirm) {
-            res.status(400).json({ msg: 'Confirm Password is not same' });
+            res.status(400).json({ msg: "Confirm Password is not same" });
             return;
         }
         if (password) {
-            bcrypt_1.default.genSalt(10)
-                .then(salt => bcrypt_1.default.hash(password, salt))
-                .then(hash => {
-                const updatedUser = user_1.default.findByIdAndUpdate(user.id, { $set: { email, password: hash, phone, name: fname + lname } }).then(() => {
-                    res.status(200).json({ msg: 'Operation Successful' });
+            bcrypt_1.default
+                .genSalt(10)
+                .then((salt) => bcrypt_1.default.hash(password, salt))
+                .then((hash) => {
+                const updatedUser = user_1.default.findByIdAndUpdate(user.id, {
+                    $set: { email, password: hash, phone, name: fname + lname }
+                }).then(() => {
+                    res.status(200).json({ msg: "Operation Successful" });
                 });
             })
-                .catch(err => {
+                .catch((err) => {
                 console.error(err);
                 res.status(500).json({ msg: "Password hashing error" });
             });
@@ -127,6 +130,9 @@ const changeInfo = (req, res) => {
 };
 exports.changeInfo = changeInfo;
 const get_user = (req, res) => {
-    user_1.default.findById(req.body.id).select('-password').then(user => res.json(user));
+    user_1.default.findById(req.body.id)
+        .select("-password")
+        .then((user) => res.json(user));
 };
 exports.get_user = get_user;
+//# sourceMappingURL=AuthController.js.map

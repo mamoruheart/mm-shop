@@ -1,14 +1,16 @@
+import path from "path";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 import AppleStrategy from "passport-apple";
 
 import User from "../model/user";
 
-dotenv.config();
+dotenv.config({
+  path: path.resolve(__dirname, "..", "..", ".env")
+});
 
-console.log(process.env.GOOGLE_CLIENT_ID!);
 passport.use(
   new GoogleStrategy(
     {
@@ -47,7 +49,7 @@ passport.use(
       teamID: process.env.APPLE_TEAM_ID!,
       callbackURL: "/auth/apple/callback",
       keyID: process.env.APPLE_KEY_ID!,
-      privateKeyLocation: "../../AuthKey_8MWT8952R5.p8" //-- Path to your private key file
+      privateKeyLocation: "../../AuthKey_8MWT8952R5.p8"
     },
     (req, accessToken, refreshToken, idToken, profile, cb) => {}
   )

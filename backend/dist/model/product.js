@@ -16,40 +16,50 @@ const ProductSchema = new mongoose_2.Schema({
     },
     category: {
         type: mongoose_1.default.Types.ObjectId,
-        ref: 'Category',
+        ref: "Category",
         required: true
     },
     price: {
         type: Number,
-        required: true,
+        required: true
     },
     date_added: {
         type: Date,
         default: Date.now
     },
     caliber: {
-        type: Number,
+        type: Number
     },
     actionType: {
         type: String,
-        enum: ['Bolt-Action', 'Lever-action', 'Semi-Automatic', 'Automatic', 'Pump-Action', 'Break-Action', 'None', 'Extra'],
+        enum: [
+            "Bolt-Action",
+            "Lever-action",
+            "Semi-Automatic",
+            "Automatic",
+            "Pump-Action",
+            "Break-Action",
+            "None",
+            "Extra"
+        ],
         required: true
     },
     barrelLength: {
-        type: Number,
+        type: Number
     },
     overAllLength: {},
     weight: {
-        type: Number,
+        type: Number
     },
     magazineCapacity: {
-        type: Number,
+        type: Number
     },
     stockType: {
-        type: String,
+        type: String
     },
     images: {
-        type: [String],
+        type: [String]
     }
 });
-exports.default = mongoose_1.default.model('Product', ProductSchema);
+exports.default = mongoose_1.default.model("Product", ProductSchema);
+//# sourceMappingURL=product.js.map

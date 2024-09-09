@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import validator, { isLowercase } from "validator";
 
 const UserSchema = new Schema({
   name: {

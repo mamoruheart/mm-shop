@@ -9,8 +9,6 @@ export const get_customer = (req: Request, res: Response) => {
 };
 
 export const post_customer = (req: Request, res: Response) => {
-  console.log("aaaaaaaaaasdfsadf");
-
   const newData = req.body;
   const newCustomer = new Customer(newData);
   console.log(newCustomer);

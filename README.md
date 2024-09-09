@@ -17,7 +17,8 @@ This project is based on `MERN` stack
 #### `backend/.env` file:
 
 ```yaml
-NODE_ENV=dev
+NODE_ENV=development
+PORT=3000
 dbURI=
 JWT_SECRET=
 MAX_UPLOAD_COUNT=

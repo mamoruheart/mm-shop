@@ -34,7 +34,6 @@ export const get_order = (req: Request, res: Response) => {
 
 export const post_order = (req: Request, res: Response) => {
   const newOrder = new Order(JSON.parse(req.body.order));
-  const file = req.file as Express.Multer.File;
   newOrder.ffl = req.file?.filename!;
   console.log(newOrder);
   newOrder.save().then((order) => {

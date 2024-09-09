@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 import User from "../model/user";
@@ -7,15 +7,12 @@ import User from "../model/user";
 export const signup = async (req: Request, res: Response) => {
   try {
     const { name, email, password, phone } = req.body;
-
     if (!name || !email || !password) {
-      res.status(400).json({ msg: "Please enter all fields" });
+      res.status(400).json({ msg: "Please enter mandatory fields" });
       return;
     }
-
     User.findOne({ email }).then((user) => {
       if (user) return res.status(400).json({ msg: "User already exists" });
-
       const newUser = new User({
         name,
         email,
@@ -23,12 +20,10 @@ export const signup = async (req: Request, res: Response) => {
         phone,
         state: 0
       });
-
       //-- create salt and hash
       bcrypt.genSalt(10, (err, salt: string) => {
         bcrypt.hash(password, salt, (err, hash) => {
           if (err) throw err;
-
           newUser.password = hash;
           newUser.save().then((user) => {
             jwt.sign(
@@ -37,7 +32,6 @@ export const signup = async (req: Request, res: Response) => {
               { expiresIn: 3600 },
               (err, token) => {
                 if (err) throw err;
-
                 res.json({
                   token,
                   user
@@ -108,7 +102,6 @@ export const changeInfo = (req: Request, res: Response) => {
       res.status(400).json({ msg: "Confirm Password is not same" });
       return;
     }
-
     if (password) {
       bcrypt
         .genSalt(10)

@@ -6,7 +6,6 @@ import {
   post_customer,
   update_customer
 } from "../controllers/CustomerController";
-// import { upload } from "../config/multer";
 import { AuthMiddleware } from "../middleware/AuthMiddleware";
 
 const router = Router();

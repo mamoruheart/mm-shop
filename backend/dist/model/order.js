@@ -8,17 +8,18 @@ const mongoose_2 = require("mongoose");
 const OrderSchema = new mongoose_2.Schema({
     user: {
         type: mongoose_1.default.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
         required: true
     },
     stepNo: {
         type: Number,
         required: true
     },
-    items: [{
+    items: [
+        {
             product: {
                 type: mongoose_1.default.Types.ObjectId,
-                ref: 'Product',
+                ref: "Product",
                 required: true
             },
             amount: {
@@ -28,9 +29,10 @@ const OrderSchema = new mongoose_2.Schema({
             },
             price: {
                 type: Number,
-                required: true,
+                required: true
             }
-        }],
+        }
+    ],
     totalPrice: {
         type: Number,
         required: true
@@ -44,7 +46,7 @@ const OrderSchema = new mongoose_2.Schema({
         },
         zip: {
             type: String
-        },
+        }
     },
     payment: {
         type: String,
@@ -59,7 +61,7 @@ const OrderSchema = new mongoose_2.Schema({
         },
         zip: {
             type: String
-        },
+        }
     },
     ffl: {
         type: String,
@@ -68,6 +70,11 @@ const OrderSchema = new mongoose_2.Schema({
     date_added: {
         type: Date,
         default: Date.now
+    },
+    user_confirm: {
+        type: Boolean,
+        default: false
     }
 });
-exports.default = mongoose_1.default.model('Order', OrderSchema);
+exports.default = mongoose_1.default.model("Order", OrderSchema);
+//# sourceMappingURL=order.js.map

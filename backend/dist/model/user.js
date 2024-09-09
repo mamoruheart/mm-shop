@@ -31,9 +31,9 @@ const UserSchema = new mongoose_1.Schema({
     },
     email: {
         type: String,
-        required: [true, 'Please enter an email'],
+        required: [true, "Please enter an email"],
         unique: true,
-        isLowercase: true,
+        isLowercase: true
     },
     phone: {
         type: String,
@@ -41,8 +41,8 @@ const UserSchema = new mongoose_1.Schema({
     },
     password: {
         type: String,
-        required: [true, 'Please enter a valid password'],
-        minLength: [6, 'Minium password length must be 6 chracters']
+        required: [true, "Please enter a valid password"],
+        minLength: [6, "Minium password length must be 6 chracters"]
     },
     state: {
         type: Number,
@@ -51,6 +51,10 @@ const UserSchema = new mongoose_1.Schema({
     register_date: {
         type: Date,
         default: Date.now
+    },
+    googleId: {
+        type: String
     }
 });
-exports.default = mongoose_1.default.model('User', UserSchema);
+exports.default = mongoose_1.default.model("User", UserSchema);
+//# sourceMappingURL=user.js.map

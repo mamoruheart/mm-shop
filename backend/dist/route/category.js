@@ -3,8 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const CategoryController_1 = require("../controllers/CategoryController");
 const router = (0, express_1.Router)();
-router.get('/', CategoryController_1.get_category);
-router.post('/', CategoryController_1.post_category);
-router.put('/:id', CategoryController_1.update_category);
-router.delete('/:id', CategoryController_1.delete_category);
+router.get("/", CategoryController_1.get_category);
+router.post("/", CategoryController_1.post_category);
+router.put("/:id", CategoryController_1.update_category);
+router.delete("/:id", CategoryController_1.delete_category);
 exports.default = router;
+//# sourceMappingURL=category.js.map
