@@ -40,4 +40,6 @@ APPLE_KEY_ID=
 
 ### Frontend
 
+#### `frontend/src/constant.ts` file should be considered
+
 &copy; 2024 All rights reserved.
