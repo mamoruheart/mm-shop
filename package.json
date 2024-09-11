@@ -1,7 +1,7 @@
 {
   "name": "mm-shop",
   "version": "1.0.8",
-  "description": "Michael’s Machines (MM)",
+  "description": "Michael’s Machines (MM) Shop",
   "main": "server/index.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",

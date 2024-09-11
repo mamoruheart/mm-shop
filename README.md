@@ -51,8 +51,9 @@ $ docker-compose up
 - For more info, see code [here](server/utils/seed.js)
 
 ```bash
+$ cd server
 # This is just an example
-$ npm run seed:db [email-***@****.com] [password-******]
+$ npm run seed:db [your_admin@email.com] [your_admin_password]
 ```
 
 ### Env variables
