@@ -1,11 +1,21 @@
-## global
+## dependencies
 node_modules
+
+## production
+build
+dist
+  
+## misc
+package.json.bak
+.DS_Store
+
+## config file
 .env
+
+## debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log* 
+
+### Apple auth
 *.p8
-
-## backend
-/backend/uploads/*
-!/backend/uploads/index.html
-
-## frontend
-/frontend/src/constant.ts
