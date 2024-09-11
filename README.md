@@ -43,4 +43,4 @@ APPLE_KEY_ID=
 
 #### `frontend/src/constant.ts` file should be considered
 
-&copy; 2024 All rights reserved.
+&copy; 2014 - 2024 Michael's Machines, All Right Reserved.
