@@ -30,9 +30,9 @@ npm: 8.19.4
 
 ## Getting Started
 
-### Docker Guide
+### Docker Guide (Optional)
 
-To run this project locally you can use docker compose configurations in the repo.
+To run this project locally you **_can use docker compose_** in the repo.
 
 Edit the **dockercompose.yml** file and update the the values for `MONGO_URI` and `JWT_SECRET`.
 
