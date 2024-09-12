@@ -1,5 +1,7 @@
 import React from "react";
 
+import { CONTACT_PHONE } from "../../../constants";
+
 const DisabledMerchantAccount = (props) => {
   const { user } = props;
 
@@ -16,7 +18,7 @@ const DisabledMerchantAccount = (props) => {
         </p>
         <div className="mt-2">
           <i className="fa fa-phone mr-2" />
-          <span>Call us 951-999-9999</span>
+          <span>Call us {CONTACT_PHONE}</span>
         </div>
       </div>
     </div>

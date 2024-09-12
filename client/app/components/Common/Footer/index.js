@@ -3,26 +3,32 @@ import { Link } from "react-router-dom";
 import { Container } from "reactstrap";
 
 import Newsletter from "../../../containers/Newsletter";
+import { COMPANY_START_YEAR } from "../../../constants";
 
 const Footer = () => {
-  const infoLinks = [
-    { id: 0, name: "Contact Us", to: "/contact" },
-    { id: 1, name: "Sell With Us", to: "/sell" },
+  const yearNow = new Date().getFullYear();
+  const serviceLinks = [
+    { id: 0, name: "Products", to: "/shop" },
+    { id: 1, name: "Brands", to: "/brands" },
     { id: 2, name: "Shipping", to: "/shipping" }
   ];
+  const contactLinks = [
+    { id: 0, name: "Contact Us", to: "/contact" },
+    { id: 1, name: "Sell With Us", to: "/sell" }
+  ];
+  const bizLinks = [
+    { id: 0, name: "Account Details", to: "/dashboard" },
+    { id: 1, name: "Orders", to: "/dashboard/orders" }
+  ];
 
-  const footerBusinessLinks = (
-    <ul className="support-links">
-      <li className="footer-link">
-        <Link to="/dashboard">Account Details</Link>
-      </li>
-      <li className="footer-link">
-        <Link to="/dashboard/orders">Orders</Link>
-      </li>
-    </ul>
-  );
-
-  const footerLinks = infoLinks.map((item) => (
+  const footerServiceLinks = serviceLinks.map((item) => (
+    <li key={item.id} className="footer-link">
+      <Link key={item.id} to={item.to}>
+        {item.name}
+      </Link>
+    </li>
+  ));
+  const footerContactLinks = contactLinks.map((item) => (
     <li key={item.id} className="footer-link">
       <Link key={item.id} to={item.to}>
         {item.name}
@@ -36,44 +42,36 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-block">
             <div className="block-title">
-              <h3 className="text-uppercase">Customer Service</h3>
+              <h3 className="text-uppercase">Services</h3>
             </div>
             <div className="block-content">
-              <ul>{footerLinks}</ul>
+              <ul>{footerServiceLinks}</ul>
             </div>
           </div>
           <div className="footer-block">
             <div className="block-title">
-              <h3 className="text-uppercase">Links</h3>
+              <h3 className="text-uppercase">Contacts</h3>
             </div>
             <div className="block-content">
-              <ul>{footerLinks}</ul>
+              <ul>{footerContactLinks}</ul>
             </div>
           </div>
           <div className="footer-block">
             <div className="block-title">
-              <h3 className="text-uppercase">Newsletter</h3>
+              <h3 className="text-uppercase">News</h3>
               <Newsletter />
             </div>
           </div>
         </div>
         <div className="footer-copyright">
-          <span>© {new Date().getFullYear()} MM Shop</span>
+          <span>
+            © {COMPANY_START_YEAR} - {yearNow} MM Shop, All Right Reserved.
+          </span>
         </div>
         <ul className="footer-social-item">
           <li>
             <a href="/#facebook" rel="noreferrer noopener" target="_blank">
               <span className="facebook-icon" />
-            </a>
-          </li>
-          <li>
-            <a href="/#instagram" rel="noreferrer noopener" target="_blank">
-              <span className="instagram-icon" />
-            </a>
-          </li>
-          <li>
-            <a href="/#pinterest" rel="noreferrer noopener" target="_blank">
-              <span className="pinterest-icon" />
             </a>
           </li>
           <li>

@@ -2,6 +2,7 @@
 .footer {
   flex-shrink: 0;
   border-top: $border-default;
+  background-color: $theme-black;
 }
 
 .footer-content {
@@ -38,14 +39,19 @@
 
   .block-title {
     padding-bottom: 10px;
+    h3 {
+      color: $theme-bright-red !important;
+    }
   }
 
   .footer-link {
     padding-bottom: 4px;
 
     a {
+      color: $default-color !important;
       &:hover {
         text-decoration: underline !important;
+        color: $theme-dark-gray !important;
       }
     }
   }
@@ -113,4 +119,7 @@
 .footer-copyright {
   text-align: center;
   padding: 16px 0px;
+  span {
+    color: $theme-white;
+  }
 }

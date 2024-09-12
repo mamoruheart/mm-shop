@@ -26,6 +26,7 @@ import { BarsIcon } from "../../components/Common/Icon";
 import MiniBrand from "../../components/Store//MiniBrand";
 import Menu from "../NavigationMenu";
 import Cart from "../Cart";
+import { CONTACT_PHONE } from "../../constants";
 
 class Navigation extends React.PureComponent {
   componentDidMount() {
@@ -134,19 +135,19 @@ class Navigation extends React.PureComponent {
             <Row>
               <Col md="4" className="text-center d-none d-md-block">
                 <i className="fa fa-truck" />
-                <span>Free Shipping</span>
+                <span>Express Shipping</span>
               </Col>
               <Col md="4" className="text-center d-none d-md-block">
                 <i className="fa fa-credit-card" />
-                <span>Payment Methods</span>
+                <span>Trust Payment</span>
               </Col>
               <Col md="4" className="text-center d-none d-md-block">
                 <i className="fa fa-phone" />
-                <span>Call us 951-999-9999</span>
+                <span>Call us {CONTACT_PHONE}</span>
               </Col>
               <Col xs="12" className="text-center d-block d-md-none">
                 <i className="fa fa-phone" />
-                <span> Need advice? Call us 951-999-9999</span>
+                <span> Need advice? Call us {CONTACT_PHONE}</span>
               </Col>
             </Row>
           </Container>

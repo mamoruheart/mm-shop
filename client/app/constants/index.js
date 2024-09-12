@@ -40,3 +40,7 @@ export const EMAIL_PROVIDER = {
   Google: "Google",
   Facebook: "Facebook"
 };
+
+export const CONTACT_PHONE = "(618) 570-8641";
+
+export const COMPANY_START_YEAR = 2014;
