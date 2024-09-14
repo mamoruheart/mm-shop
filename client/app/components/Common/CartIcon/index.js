@@ -25,6 +25,7 @@ const CartIcon = (props) => {
       ariaLabel={
         items > 0 ? `your cart have ${items} items` : "your cart is empty"
       }
+      title="Your shopping cart"
       icon={Icon}
       onClick={onClick}
     />

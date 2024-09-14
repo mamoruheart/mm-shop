@@ -142,7 +142,15 @@
       margin: 0px;
       color: $font-custom-color !important;
       @include media-breakpoint-up(md) {
-        margin-left: 15px;
+        margin-left: 0.5rem;
+      }
+      img.logo-mmshop {
+        width: 49px;
+      }
+      .logo-mmname {
+        font-family: Impact;
+        font-size: 16px;
+        vertical-align: bottom;
       }
     }
   }

@@ -36,7 +36,8 @@ const Button = (props) => {
     tooltipContent,
     popover,
     popoverContent,
-    popoverTitle
+    popoverTitle,
+    title
   } = props;
   const v = variant ? variants[variant] : "";
   const btnVariant = v;
@@ -66,6 +67,7 @@ const Button = (props) => {
       style={{
         borderRadius: round
       }}
+      title={title || ""}
     >
       {tooltip && <Tooltip target={tooltipId}>{tooltipContent}</Tooltip>}
       {popover && (

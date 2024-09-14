@@ -83,7 +83,7 @@ button {
   &.custom-btn-primary {
     position: relative;
     border: $border-default;
-    background-color: $btn-bg;
+    background-color: $btn-bg-gray;
     -webkit-transition: $layout-transition-speed;
     transition: $layout-transition-speed;
 
@@ -93,7 +93,7 @@ button {
     }
 
     &:hover {
-      background-color: $primary-bg;
+      background-color: $theme-primary-red;
 
       .btn-text {
         color: $white !important;

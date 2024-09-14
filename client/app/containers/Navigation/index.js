@@ -138,16 +138,16 @@ class Navigation extends React.PureComponent {
                 <span>Express Shipping</span>
               </Col>
               <Col md="4" className="text-center d-none d-md-block">
-                <i className="fa fa-credit-card" />
+                <i className="fa fa-money" />
                 <span>Trust Payment</span>
               </Col>
               <Col md="4" className="text-center d-none d-md-block">
                 <i className="fa fa-phone" />
-                <span>Call us {CONTACT_PHONE}</span>
+                <span>Orders &amp; Info {CONTACT_PHONE}</span>
               </Col>
               <Col xs="12" className="text-center d-block d-md-none">
                 <i className="fa fa-phone" />
-                <span> Need advice? Call us {CONTACT_PHONE}</span>
+                <span> Need help? Orders &amp; Info {CONTACT_PHONE}</span>
               </Col>
             </Row>
           </Container>
@@ -157,8 +157,8 @@ class Navigation extends React.PureComponent {
             <Col
               xs={{ size: 12, order: 1 }}
               sm={{ size: 12, order: 1 }}
-              md={{ size: 3, order: 1 }}
-              lg={{ size: 3, order: 1 }}
+              md={{ size: 5, order: 1 }}
+              lg={{ size: 4, order: 1 }}
               className="pr-0"
             >
               <div className="brand">
@@ -173,7 +173,12 @@ class Navigation extends React.PureComponent {
                   />
                 )}
                 <Link to="/">
-                  <h1 className="logo">MM Shop</h1>
+                  <h1 className="logo">
+                    <img src="/images/mmlogo.gif" className="logo-mmshop" />
+                    <span className="logo-mmname">
+                      &nbsp;Michael's Machines
+                    </span>
+                  </h1>
                 </Link>
               </div>
             </Col>
@@ -181,7 +186,7 @@ class Navigation extends React.PureComponent {
               xs={{ size: 12, order: 4 }}
               sm={{ size: 12, order: 4 }}
               md={{ size: 12, order: 4 }}
-              lg={{ size: 5, order: 2 }}
+              lg={{ size: 4, order: 2 }}
               className="pt-2 pt-lg-0"
             >
               <Autosuggest
@@ -217,7 +222,7 @@ class Navigation extends React.PureComponent {
             <Col
               xs={{ size: 12, order: 2 }}
               sm={{ size: 12, order: 2 }}
-              md={{ size: 9, order: 1 }}
+              md={{ size: 7, order: 1 }}
               lg={{ size: 4, order: 3 }}
               // className="px-0"
             >

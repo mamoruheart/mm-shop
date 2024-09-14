@@ -46,6 +46,7 @@ $orange: #fabb3d;
 $yellow: #ffc107 !default;
 $green: #79c447;
 $gray: #808081;
+$lightgray: #d3d3d3;
 $teal: #20c997 !default;
 $cyan: #67c2ef;
 $black: #000;
@@ -76,6 +77,7 @@ $font-weight-bold: 700;
 //-- layout variables
 $btn-bg: $white;
 $btn-bg-hover: $primary-bg;
+$btn-bg-gray: $lightgray;
 $font-color: #65676b;
 $font-light-color: #00000026;
 $font-custom-color: $theme-black;
