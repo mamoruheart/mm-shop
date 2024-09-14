@@ -5,7 +5,7 @@ import actions from "../../actions";
 import CartList from "../../components/Store/CartList";
 import CartSummary from "../../components/Store/CartSummary";
 import Checkout from "../../components/Store/Checkout";
-import { BagIcon, CloseIcon } from "../../components/Common/Icon";
+import { ShoppingCart2Icon, CloseIcon } from "../../components/Common/Icon";
 import Button from "../../components/Common/Button";
 
 class Cart extends React.PureComponent {
@@ -45,7 +45,7 @@ class Cart extends React.PureComponent {
           </div>
         ) : (
           <div className="empty-cart">
-            <BagIcon />
+            <ShoppingCart2Icon />
             <p>Your shopping cart is empty</p>
           </div>
         )}

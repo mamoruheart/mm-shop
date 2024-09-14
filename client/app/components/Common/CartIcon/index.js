@@ -1,13 +1,13 @@
 import React from "react";
 
-import { BagIcon } from "../Icon";
+import { ShoppingCartIcon } from "../Icon";
 import Button from "../Button";
 
 const CartIcon = (props) => {
   const { className, onClick, cartItems } = props;
   const Icon = (
     <span className="cart-icon">
-      <BagIcon />
+      <ShoppingCartIcon />
       {cartItems.length > 0 && (
         <span className="cart-badge">
           {cartItems.length >= 99 ? "99+" : cartItems.length}
