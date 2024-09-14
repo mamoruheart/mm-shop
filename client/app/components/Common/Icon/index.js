@@ -4,8 +4,8 @@ const ShoppingCartIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20px"
-      height="auto"
+      width="20"
+      height="16.8"
       viewBox="0 0 47.998 40.34"
       aria-hidden="true"
     >
