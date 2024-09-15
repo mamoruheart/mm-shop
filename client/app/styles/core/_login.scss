@@ -15,7 +15,7 @@
 }
 
 .google-btn,
-.facebook-btn {
+.apple-btn {
   @include flex();
   -ms-flex-wrap: wrap;
   -webkit-flex-wrap: wrap;
@@ -37,7 +37,7 @@
   }
 
   .google-icon,
-  .facebook-icon {
+  .apple-icon {
     width: 30px;
     height: 30px;
   }

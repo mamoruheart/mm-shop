@@ -73,7 +73,13 @@
     &.active {
       .page-link {
         color: $white !important;
-        background-color: $primary-bg;
+        background-color: $theme-primary-red;
+        border-color: $theme-bright-red;
+      }
+    }
+    .page-link {
+      &:focus {
+        box-shadow: 0 0 0 0.2rem rgba(255, 18, 0, 0.25);
       }
     }
   }

@@ -95,6 +95,11 @@
     background-size: 100%;
   }
 
+  .apple-icon {
+    @include icon($apple, 40px, 40px);
+    background-size: 100%;
+  }
+
   .instagram-icon {
     @include icon($instagram, 40px, 40px);
     background-size: 100%;

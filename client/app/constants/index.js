@@ -38,7 +38,7 @@ export const REVIEW_STATUS = {
 export const EMAIL_PROVIDER = {
   Email: "Email",
   Google: "Google",
-  Facebook: "Facebook"
+  Apple: "Apple"
 };
 
 export const CONTACT_PHONE = "(618) 570-8641";

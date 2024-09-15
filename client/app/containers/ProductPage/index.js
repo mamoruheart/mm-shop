@@ -8,7 +8,7 @@ import Input from "../../components/Common/Input";
 import Button from "../../components/Common/Button";
 import LoadingIndicator from "../../components/Common/LoadingIndicator";
 import NotFound from "../../components/Common/NotFound";
-import { BagIcon } from "../../components/Common/Icon";
+import { ShoppingCartIcon } from "../../components/Common/Icon";
 import ProductReviews from "../../components/Store/ProductReviews";
 import SocialShare from "../../components/Store/SocialShare";
 
@@ -126,9 +126,9 @@ class ProductPage extends React.PureComponent {
                             product.inventory <= 0 &&
                             !shopFormErrors["quantity"]
                           }
-                          text="Remove From Bag"
-                          className="bag-btn"
-                          icon={<BagIcon />}
+                          text="Remove From Cart"
+                          className="cart-btn"
+                          icon={<ShoppingCartIcon />}
                           onClick={() => handleRemoveFromCart(product)}
                         />
                       ) : (
@@ -137,9 +137,9 @@ class ProductPage extends React.PureComponent {
                           disabled={
                             product.quantity <= 0 && !shopFormErrors["quantity"]
                           }
-                          text="Add To Bag"
-                          className="bag-btn"
-                          icon={<BagIcon />}
+                          text="Add To Cart"
+                          className="cart-btn"
+                          icon={<ShoppingCartIcon />}
                           onClick={() => handleAddToCart(product)}
                         />
                       )}

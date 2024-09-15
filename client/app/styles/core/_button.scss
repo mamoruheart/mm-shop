@@ -315,9 +315,9 @@ body.user-is-tabbing button:focus {
   }
 }
 
-//-- bag button
+//-- cart button
 .input-btn {
-  &.bag-btn {
+  &.cart-btn {
     box-shadow: $box-shadow-custom;
     min-width: 185px;
     @include media-breakpoint-down(sm) {
@@ -326,7 +326,7 @@ body.user-is-tabbing button:focus {
 
     &:focus {
       &.with-icon {
-        background-color: $primary-bg;
+        background-color: $theme-pink;
         border-color: transparent;
         -webkit-transition: $layout-transition-speed;
         transition: $layout-transition-speed;
