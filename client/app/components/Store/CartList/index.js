@@ -25,7 +25,7 @@ const CartList = (props) => {
                       src={`${
                         item.imageUrl
                           ? item.imageUrl
-                          : "/images/placeholder-image.png"
+                          : "/images/placeholder-image.jpg"
                       }`}
                     />
 

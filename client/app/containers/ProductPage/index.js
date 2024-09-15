@@ -63,7 +63,7 @@ class ProductPage extends React.PureComponent {
                     src={`${
                       product.imageUrl
                         ? product.imageUrl
-                        : "/images/placeholder-image.png"
+                        : "/images/placeholder-image.jpg"
                     }`}
                   />
                   {product.inventory <= 0 && !shopFormErrors["quantity"] ? (

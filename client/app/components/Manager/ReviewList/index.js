@@ -35,7 +35,7 @@ const ReviewList = (props) => {
             src={`${
               product.imageUrl
                 ? product.imageUrl
-                : "/images/placeholder-image.png"
+                : "/images/placeholder-image.jpg"
             }`}
           />
         </div>

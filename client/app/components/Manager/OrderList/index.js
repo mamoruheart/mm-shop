@@ -15,12 +15,12 @@ const OrderList = (props) => {
           src={`${
             product && product?.imageUrl
               ? product?.imageUrl
-              : "/images/placeholder-image.png"
+              : "/images/placeholder-image.jpg"
           }`}
         />
       );
     } else {
-      return <img className="item-image" src="/images/placeholder-image.png" />;
+      return <img className="item-image" src="/images/placeholder-image.jpg" />;
     }
   };
 
