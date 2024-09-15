@@ -101,28 +101,29 @@
   }
 
   .rc-slider-track {
-    background-color: $primary-bg;
+    background-color: $theme-light-red;
   }
 
   .rc-slider-dot-active {
-    border-color: $primary-bg;
+    border-color: $theme-primary-red;
   }
   .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
     box-shadow: none;
-    border-color: $primary-bg;
+    border-color: $theme-primary-red;
   }
 
   .rc-slider-handle-click-focused:focus {
-    border-color: $primary-bg;
+    border-color: $theme-bright-red;
   }
 
   .rc-slider-handle {
     box-shadow: none;
-    border-color: $primary-bg;
+    border-color: $theme-primary-red;
 
     &:active,
     &:hover {
-      border-color: $primary-bg;
+      border-color: $theme-primary-red;
+      box-shadow: 0 0 5px $theme-pink;
     }
   }
 }
