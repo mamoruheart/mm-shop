@@ -10,10 +10,10 @@ class MailgunService {
     try {
       return new Mailgun({
         apiKey: key,
-        domain: domain
+        domain
       });
-    } catch (error) {
-      console.warn("Missing mailgun keys");
+    } catch (err) {
+      console.warn("Missing mailgun keys:", err?.message);
     }
   }
 }

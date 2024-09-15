@@ -13,6 +13,7 @@ const keys = require("../../config/keys");
 const { EMAIL_PROVIDER } = require("../../constants");
 
 const { secret, tokenLife } = keys.jwt;
+const { key, listKey } = keys.mailchimp;
 
 router.post("/login", async (req, res) => {
   try {
@@ -106,10 +107,12 @@ router.post("/register", async (req, res) => {
 
     let subscribed = false;
     if (isSubscribed) {
-      const result = await mailchimp.subscribeToNewsletter(email);
+      if (key && listKey) {
+        const result = await mailchimp.subscribeToNewsletter(email);
 
-      if (result.status === "subscribed") {
-        subscribed = true;
+        if (result.status === "subscribed") {
+          subscribed = true;
+        }
       }
     }
 

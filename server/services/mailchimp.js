@@ -8,8 +8,8 @@ class MailchimpService {
   init() {
     try {
       return new Mailchimp(key);
-    } catch (error) {
-      console.warn("Missing mailchimp keys");
+    } catch (err) {
+      console.warn("Missing mailchimp keys:", err?.message);
     }
   }
 }
