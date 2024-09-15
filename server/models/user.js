@@ -36,7 +36,7 @@ const UserSchema = new Schema({
   googleId: {
     type: String
   },
-  facebookId: {
+  appleId: {
     type: String
   },
   avatar: {

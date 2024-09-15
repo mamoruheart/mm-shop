@@ -322,16 +322,16 @@ router.get(
 );
 
 router.get(
-  "/facebook",
-  passport.authenticate("facebook", {
+  "/apple",
+  passport.authenticate("apple", {
     session: false,
     scope: ["public_profile", "email"]
   })
 );
 
 router.get(
-  "/facebook/callback",
-  passport.authenticate("facebook", {
+  "/apple/callback",
+  passport.authenticate("apple", {
     failureRedirect: `${keys.app.clientURL}/login`,
     session: false
   }),

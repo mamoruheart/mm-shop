@@ -64,6 +64,12 @@ Create `.env` file for both **client** and **server**. See examples:
 
 - [Backend ENV](server/.env.example)
 
+### Apple `AuthKey` file - `*.p8`
+
+Create `.p8` file for **server**. See examples:
+
+- [Apple AuthKey P8 file](server/AuthKey_8MWT8952R5.p8.example)
+
 ### Vercel Deployment (Optional Yet)
 
 Both **frontend** and **backend** can be deployed on `Vercel` from the same repository.

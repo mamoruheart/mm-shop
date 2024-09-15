@@ -15,7 +15,6 @@ class Notification extends React.PureComponent {
         DefaultStyle: {
           margin: "10px 5px 2px 1px"
         },
-
         success: {
           color: "red"
         }

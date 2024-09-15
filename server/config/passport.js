@@ -1,14 +1,15 @@
 const passport = require("passport");
 const JwtStrategy = require("passport-jwt").Strategy;
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
-const FacebookStrategy = require("passport-facebook").Strategy;
+const AppleStrategy = require("passport-apple").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const mongoose = require("mongoose");
+const path = require("path");
 
 const keys = require("./keys");
 const { EMAIL_PROVIDER } = require("../constants");
 
-const { google, facebook } = keys;
+const { google, apple } = keys;
 
 const User = mongoose.model("User");
 const secret = keys.jwt.secret;
@@ -37,7 +38,7 @@ module.exports = async (app) => {
   app.use(passport.initialize());
 
   await googleAuth();
-  await facebookAuth();
+  await appleAuth();
 };
 
 const googleAuth = async () => {
@@ -87,32 +88,31 @@ const googleAuth = async () => {
   }
 };
 
-const facebookAuth = async () => {
+const appleAuth = async () => {
   try {
     passport.use(
-      new FacebookStrategy(
+      new AppleStrategy(
         {
-          clientID: facebook.clientID,
-          clientSecret: facebook.clientSecret,
-          callbackURL: facebook.callbackURL,
-          profileFields: [
-            "id",
-            "displayName",
-            "name",
-            "emails",
-            "picture.type(large)"
-          ]
+          clientID: apple.clientID,
+          teamID: apple.teamID,
+          callbackURL: apple.callbackURL,
+          keyID: apple.keyID,
+          privateKeyLocation: path.resolve(
+            __dirname,
+            "..",
+            "AuthKey_8MWT8952R5.p8"
+          )
         },
-        (accessToken, refreshToken, profile, done) => {
-          User.findOne({ facebookId: profile.id })
+        (accessToken, refreshToken, idToken, profile, done) => {
+          User.findOne({ appleId: profile.id })
             .then((user) => {
               if (user) {
                 return done(null, user);
               }
 
               const newUser = new User({
-                provider: EMAIL_PROVIDER.Facebook,
-                facebookId: profile.id,
+                provider: EMAIL_PROVIDER.Apple,
+                appleId: profile.id,
                 email: profile.emails ? profile.emails[0].value : null,
                 firstName: profile.name.givenName,
                 lastName: profile.name.familyName,
@@ -135,6 +135,6 @@ const facebookAuth = async () => {
       )
     );
   } catch (error) {
-    console.log("Missing facebook keys");
+    console.log("Missing apple keys");
   }
 };
