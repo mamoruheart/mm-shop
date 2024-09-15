@@ -7,7 +7,7 @@ import actions from "../../actions";
 import Input from "../../components/Common/Input";
 import Button from "../../components/Common/Button";
 import LoadingIndicator from "../../components/Common/LoadingIndicator";
-import SignupProvider from "../../components/Common/SignupProvider";
+import SigninProvider from "../../components/Common/SigninProvider";
 
 class Login extends React.PureComponent {
   render() {
@@ -76,7 +76,7 @@ class Login extends React.PureComponent {
               md={{ size: "6", order: 2 }}
               className="mb-2 mb-md-0"
             >
-              <SignupProvider />
+              <SigninProvider />
             </Col>
           </Row>
           <hr />
