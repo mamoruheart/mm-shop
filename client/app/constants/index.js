@@ -43,4 +43,6 @@ export const EMAIL_PROVIDER = {
 
 export const CONTACT_PHONE = "(618) 570-8641";
 
+export const COMPANY_NAME = "Michael’s Machines";
+
 export const COMPANY_START_YEAR = 2014;

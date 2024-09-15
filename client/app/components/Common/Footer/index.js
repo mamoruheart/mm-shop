@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Container } from "reactstrap";
 
 import Newsletter from "../../../containers/Newsletter";
-import { COMPANY_START_YEAR } from "../../../constants";
+import { COMPANY_NAME, COMPANY_START_YEAR } from "../../../constants";
 
 const Footer = () => {
   const yearNow = new Date().getFullYear();
@@ -65,7 +65,9 @@ const Footer = () => {
         </div>
         <div className="footer-copyright">
           <span>
-            © {COMPANY_START_YEAR} - {yearNow} MM Shop, All Right Reserved.
+            © {COMPANY_START_YEAR} - {yearNow} {COMPANY_NAME}
+            <br />
+            All Right Reserved.
           </span>
         </div>
         <ul className="footer-social-item">

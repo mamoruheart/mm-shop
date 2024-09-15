@@ -26,7 +26,7 @@ import { BarsIcon } from "../../components/Common/Icon";
 import MiniBrand from "../../components/Store//MiniBrand";
 import Menu from "../NavigationMenu";
 import Cart from "../Cart";
-import { CONTACT_PHONE } from "../../constants";
+import { COMPANY_NAME, CONTACT_PHONE } from "../../constants";
 
 class Navigation extends React.PureComponent {
   componentDidMount() {
@@ -175,9 +175,7 @@ class Navigation extends React.PureComponent {
                 <Link to="/">
                   <h1 className="logo">
                     <img src="/images/mmlogo.gif" className="logo-mmshop" />
-                    <span className="logo-mmname">
-                      &nbsp;Michael's Machines
-                    </span>
+                    <span className="logo-mmname">&nbsp;{COMPANY_NAME}</span>
                   </h1>
                 </Link>
               </div>

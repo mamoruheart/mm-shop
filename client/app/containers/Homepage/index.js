@@ -6,7 +6,7 @@ import actions from "../../actions";
 import banners from "./banners.json";
 import CarouselSlider from "../../components/Common/CarouselSlider";
 import { responsiveOneItemCarousel } from "../../components/Common/CarouselSlider/utils";
-import { CONTACT_PHONE } from "../../constants";
+import { COMPANY_NAME, CONTACT_PHONE } from "../../constants";
 
 class Homepage extends React.PureComponent {
   render() {
@@ -51,7 +51,7 @@ class Homepage extends React.PureComponent {
             className="order-lg-2 mb-3 px-3 px-md-2 mx-auto text-center"
           >
             <img src="/images/mmlogo-sunburst.jpg" alt="MM" />
-            <img src="/images/mm-name.gif" alt="Michael's Machines" />
+            <img src="/images/mm-name.gif" alt={COMPANY_NAME} />
           </Col>
           <Col xs="12" className="order-lg-2 mb-3 px-3 px-md-2 text-center">
             <h1>“Your One Stop Roller-Lock Shop”</h1>
@@ -59,12 +59,11 @@ class Homepage extends React.PureComponent {
           </Col>
           <Col xs="12" className="order-lg-2 mb-3 px-3 px-md-2 text-center">
             <h2>
-              Michael’s Machines (MM) Specializes in Firearms Based On the HK*
+              {COMPANY_NAME} (MM) Specializes in Firearms Based On the HK*
               Recoil Operated and Delayed Roller Lock Bolt System. MM is a Class
               2 Manufacture and NFA Dealer. MM's focus is on custom belt-fed
-              rifles in 5.56 and 7.62 NATO calibers. Michael’s Machines
-              manufactures a full line of HK* style rifles, parts and
-              accessories.
+              rifles in 5.56 and 7.62 NATO calibers. {COMPANY_NAME} manufactures
+              a full line of HK* style rifles, parts and accessories.
             </h2>
           </Col>
           <Col xs="12" className="order-lg-2 mb-3 px-3 px-md-2 text-center">
