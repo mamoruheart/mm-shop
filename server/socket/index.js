@@ -2,10 +2,9 @@ const socketio = require("socket.io");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
+const User = mongoose.model("User");
 const { ROLES } = require("../constants");
 const keys = require("../config/keys");
-const User = mongoose.model("User");
-
 const support = require("./support");
 
 const authHandler = async (socket, next) => {

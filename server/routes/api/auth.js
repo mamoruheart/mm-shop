@@ -6,12 +6,11 @@ const crypto = require("crypto");
 const passport = require("passport");
 
 const auth = require("../../middleware/auth");
-
 const User = require("../../models/user");
 const mailchimp = require("../../services/mailchimp");
 const mailgun = require("../../services/mailgun");
 const keys = require("../../config/keys");
-const { EMAIL_PROVIDER, JWT_COOKIE } = require("../../constants");
+const { EMAIL_PROVIDER } = require("../../constants");
 
 const { secret, tokenLife } = keys.jwt;
 
