@@ -17,7 +17,7 @@ export const updateWishlist = (isLiked, productId) => {
         const successfulOptions = {
           title: `${response.data.message}`,
           position: "tr",
-          autoDismiss: 1
+          autoDismiss: 3
         };
 
         if (response.data.success === true) {
@@ -28,7 +28,7 @@ export const updateWishlist = (isLiked, productId) => {
         const retryOptions = {
           title: `Please login to wishlist a product`,
           position: "tr",
-          autoDismiss: 1
+          autoDismiss: 3
         };
         dispatch(warning(retryOptions));
       }

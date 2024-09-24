@@ -58,7 +58,7 @@ export const login = () => {
       const successfulOptions = {
         title: `Hey${firstName ? ` ${firstName}` : ""}, Welcome Back!`,
         position: "tr",
-        autoDismiss: 1
+        autoDismiss: 3
       };
 
       localStorage.setItem("token", response.data.token);
@@ -84,7 +84,7 @@ export const signOut = () => {
     const successfulOptions = {
       title: `You have signed out!`,
       position: "tr",
-      autoDismiss: 1
+      autoDismiss: 3
     };
 
     dispatch(clearAuth());

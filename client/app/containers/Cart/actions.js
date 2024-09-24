@@ -121,7 +121,7 @@ export const handleCheckout = () => {
     const successfulOptions = {
       title: `Please Login to proceed to checkout`,
       position: "tr",
-      autoDismiss: 1
+      autoDismiss: 3
     };
 
     dispatch(toggleCart());

@@ -8,7 +8,7 @@ const setToken = (token) => {
       delete axios.defaults.headers.common["Authorization"];
     }
   } catch (err) {
-    console.error("setToken:", err);
+    console.error("setToken:", err?.message);
   }
 };
 

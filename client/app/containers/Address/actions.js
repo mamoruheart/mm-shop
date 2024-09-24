@@ -118,7 +118,7 @@ export const addAddress = () => {
       const successfulOptions = {
         title: `${response.data.message}`,
         position: "tr",
-        autoDismiss: 1
+        autoDismiss: 3
       };
 
       if (response.data.success === true) {
@@ -172,7 +172,7 @@ export const updateAddress = () => {
       const successfulOptions = {
         title: `${response.data.message}`,
         position: "tr",
-        autoDismiss: 1
+        autoDismiss: 3
       };
 
       if (response.data.success === true) {
@@ -193,7 +193,7 @@ export const deleteAddress = (id) => {
       const successfulOptions = {
         title: `${response.data.message}`,
         position: "tr",
-        autoDismiss: 1
+        autoDismiss: 3
       };
 
       if (response.data.success === true) {

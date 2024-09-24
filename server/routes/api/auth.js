@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({
         success: false,
-        error: "Password Incorrect"
+        error: "Password Incorrect."
       });
     }
 

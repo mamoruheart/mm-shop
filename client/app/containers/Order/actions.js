@@ -178,7 +178,7 @@ export const updateOrderItemStatus = (itemId, status) => {
       const successfulOptions = {
         title: `${response.data.message}`,
         position: "tr",
-        autoDismiss: 1
+        autoDismiss: 3
       };
 
       dispatch(success(successfulOptions));
