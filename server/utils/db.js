@@ -1,5 +1,11 @@
 const chalk = require("chalk");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const path = require("path");
+
+dotenv.config({
+  path: path.resolve(__dirname, "..", ".env")
+});
 
 const keys = require("../config/keys");
 const { database } = keys;

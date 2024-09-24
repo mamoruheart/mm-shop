@@ -1,8 +1,7 @@
 const passport = require("passport");
-const JwtStrategy = require("passport-jwt").Strategy;
-const GoogleStrategy = require("passport-google-oauth2").Strategy;
-const AppleStrategy = require("passport-apple").Strategy;
-const ExtractJwt = require("passport-jwt").ExtractJwt;
+const { Strategy: JwtStrategy } = require("passport-jwt");
+const { Strategy: GoogleStrategy } = require("passport-google-oauth2");
+const { Strategy: AppleStrategy } = require("passport-apple");
 const mongoose = require("mongoose");
 const path = require("path");
 
@@ -10,26 +9,43 @@ const keys = require("./keys");
 const { EMAIL_PROVIDER } = require("../constants");
 
 const { google, apple } = keys;
-const { secret } = keys.jwt;
+const { secret, myBearerPrefix } = keys.jwt;
 
 const User = mongoose.model("User");
 
-const opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = secret;
+//-- extractor for custom token prefix
+const myBearerExtractor = (req) => {
+  try {
+    let token = null;
+    if (req.headers && req.headers.authorization) {
+      const parts = req.headers.authorization.split(" ");
+      if (parts.length === 2 && parts[0] === myBearerPrefix) {
+        token = parts[1];
+      }
+    }
+    return token;
+  } catch (err) {
+    console.error("myBearerExtractor:", err?.message);
+    return null;
+  }
+};
+
+const opts = {
+  jwtFromRequest: myBearerExtractor,
+  secretOrKey: secret
+};
 
 passport.use(
-  new JwtStrategy(opts, (payload, done) => {
-    User.findById(payload.id)
-      .then((user) => {
-        if (user) {
-          return done(null, user);
-        }
-        return done(null, false);
-      })
-      .catch((err) => {
-        return done(err, false);
-      });
+  new JwtStrategy(opts, async (payload, done) => {
+    try {
+      const user = await User.findById(payload.id);
+      if (user) {
+        return done(null, user);
+      }
+      return done(null, false);
+    } catch (err) {
+      return done(err, false);
+    }
   })
 );
 

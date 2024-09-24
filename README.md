@@ -1,6 +1,6 @@
 # mm-shop
 
-> MMShop
+> MM Shop
 
 ## Description
 
