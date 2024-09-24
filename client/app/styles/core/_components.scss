@@ -1,0 +1,130 @@
+/* start dropdown confirm styles */
+.dropdown-confirm {
+  .dropdown-action {
+    position: relative;
+    border: $border-default;
+    border-radius: $border-radius-default;
+    background-color: $btn-bg;
+    -webkit-transition: $layout-transition-speed;
+    transition: $layout-transition-speed;
+
+    &.sm {
+      padding: 6px 10px;
+      min-width: 100px;
+
+      .btn-text {
+        font-size: $font-size-x-small;
+      }
+    }
+
+    &.md {
+      padding: 10px 16px;
+      min-width: 135px;
+    }
+
+    .btn-text {
+      -webkit-transition: $layout-transition-speed;
+      transition: $layout-transition-speed;
+    }
+
+    &:hover {
+      background-color: $secondary-bg;
+      color: $font-custom-color !important;
+
+      .btn-text {
+        -webkit-transition: $layout-transition-speed;
+        transition: $layout-transition-speed;
+      }
+    }
+  }
+
+  .btn-group {
+    &.show {
+      .dropdown-action {
+        background-color: $secondary-bg;
+      }
+    }
+  }
+
+  .dropdown-menu {
+    min-width: 250px;
+  }
+
+  .nav-link {
+    padding: 0;
+  }
+}
+/* end dropdown confirm styles */
+
+/* start pagination styles */
+.pagination-box {
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  @include hide-scrollbar();
+
+  .page-link {
+    white-space: nowrap;
+  }
+}
+
+.pagination {
+  .page-item {
+    &.active {
+      .page-link {
+        color: $white !important;
+        background-color: $theme-primary-red;
+        border-color: $theme-bright-red;
+      }
+    }
+    .page-link {
+      &:focus {
+        box-shadow: 0 0 0 0.2rem rgba(255, 18, 0, 0.25);
+      }
+    }
+  }
+}
+/* end pagination styles */
+
+/* start slider styles */
+.slider {
+  .rc-slider-mark-text {
+    .fa {
+      color: $stars;
+    }
+  }
+
+  .rc-slider-mark-text-active {
+    .fa {
+      color: $stars-active;
+    }
+  }
+
+  .rc-slider-track {
+    background-color: $theme-light-red;
+  }
+
+  .rc-slider-dot-active {
+    border-color: $theme-primary-red;
+  }
+  .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
+    box-shadow: none;
+    border-color: $theme-primary-red;
+  }
+
+  .rc-slider-handle-click-focused:focus {
+    border-color: $theme-bright-red;
+  }
+
+  .rc-slider-handle {
+    box-shadow: none;
+    border-color: $theme-primary-red;
+
+    &:active,
+    &:hover {
+      border-color: $theme-primary-red;
+      box-shadow: 0 0 5px $theme-pink;
+    }
+  }
+}
+/* end slider styles */
