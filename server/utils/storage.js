@@ -8,7 +8,7 @@ exports.s3Upload = async (image) => {
     let imageKey = "";
 
     if (!keys.aws.accessKeyId) {
-      console.warn("Missing aws keys");
+      throw new Error("Missing aws keys");
     }
 
     if (image) {
@@ -28,11 +28,12 @@ exports.s3Upload = async (image) => {
       const s3Upload = await s3bucket.upload(params).promise();
 
       imageUrl = s3Upload.Location;
-      imageKey = s3Upload.key;
+      imageKey = s3Upload.Key;
     }
 
     return { imageUrl, imageKey };
-  } catch (error) {
+  } catch (err) {
+    console.error("s3Upload:", err);
     return { imageUrl: "", imageKey: "" };
   }
 };

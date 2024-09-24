@@ -40,14 +40,15 @@ router.post("/", auth, async (req, res) => {
         wishlist: wishlistDoc
       });
     }
-  } catch (e) {
-    return res.status(400).json({
+  } catch (err) {
+    console.error("[POST] - (/wishlist/):", err);
+    res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch wishlist api
+//-- API: fetch wishlist
 router.get("/", auth, async (req, res) => {
   try {
     const user = req.user._id;
@@ -62,7 +63,8 @@ router.get("/", auth, async (req, res) => {
     res.status(200).json({
       wishlist
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/wishlist/):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });

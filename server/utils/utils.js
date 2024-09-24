@@ -1,5 +1,9 @@
 exports.asyncForEach = async (array, callback) => {
-  for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array);
+  try {
+    for (let idx = 0; idx < array.length; idx++) {
+      await callback(array[idx], idx, array);
+    }
+  } catch (err) {
+    console.error("Error during async iteration:", err);
   }
 };

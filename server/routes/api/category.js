@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const passport = require("passport");
 
 const Category = require("../../models/category");
 const auth = require("../../middleware/auth");
@@ -8,69 +7,74 @@ const role = require("../../middleware/role");
 const store = require("../../utils/store");
 const { ROLES } = require("../../constants");
 
-router.post("/add", auth, role.check(ROLES.Admin), (req, res) => {
-  const name = req.body.name;
-  const description = req.body.description;
-  const products = req.body.products;
-  const isActive = req.body.isActive;
+router.post("/add", auth, role.check(ROLES.Admin), async (req, res) => {
+  try {
+    const name = req.body.name;
+    const description = req.body.description;
+    const products = req.body.products;
+    const isActive = req.body.isActive;
 
-  if (!description || !name) {
-    return res
-      .status(400)
-      .json({ error: "You must enter description & name." });
-  }
-
-  const category = new Category({
-    name,
-    description,
-    products,
-    isActive
-  });
-
-  category.save((err, data) => {
-    if (err) {
-      return res.status(400).json({
-        error: "Your request could not be processed. Please try again."
-      });
+    if (!description || !name) {
+      return res
+        .status(400)
+        .json({ error: "You must enter description & name." });
     }
+
+    const category = new Category({
+      name,
+      description,
+      products,
+      isActive
+    });
+
+    const categoryDoc = await category.save();
 
     res.status(200).json({
       success: true,
       message: `Category has been added successfully!`,
-      category: data
+      category: categoryDoc
     });
-  });
+  } catch (err) {
+    console.error("[POST] - (/category/add):", err);
+    res.status(400).json({
+      error: "Your request could not be processed. Please try again."
+    });
+  }
 });
 
-//-- fetch store categories api
+//-- API: fetch store categories
 router.get("/list", async (req, res) => {
   try {
     const categories = await Category.find({ isActive: true });
+
     res.status(200).json({
       categories
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/category/list):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch categories api
+//-- API: fetch categories
 router.get("/", async (req, res) => {
   try {
     const categories = await Category.find({});
+
     res.status(200).json({
       categories
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/category/):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch category api
+//-- API: fetch category
 router.get("/:id", async (req, res) => {
   try {
     const categoryId = req.params.id;
@@ -79,7 +83,6 @@ router.get("/:id", async (req, res) => {
       path: "products",
       select: "name"
     });
-
     if (!categoryDoc) {
       return res.status(404).json({
         message: "No Category found."
@@ -89,7 +92,8 @@ router.get("/:id", async (req, res) => {
     res.status(200).json({
       category: categoryDoc
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/category/:id):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -106,7 +110,6 @@ router.put("/:id", auth, role.check(ROLES.Admin), async (req, res) => {
     const foundCategory = await Category.findOne({
       $or: [{ slug }]
     });
-
     if (foundCategory && foundCategory._id != categoryId) {
       return res.status(400).json({ error: "Slug is already in use." });
     }
@@ -119,7 +122,8 @@ router.put("/:id", auth, role.check(ROLES.Admin), async (req, res) => {
       success: true,
       message: "Category has been updated successfully!"
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[PUT] - (/category/:id):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -132,7 +136,7 @@ router.put("/:id/active", auth, role.check(ROLES.Admin), async (req, res) => {
     const update = req.body.category;
     const query = { _id: categoryId };
 
-    //-- disable category(categoryId) products
+    //-- disable category (categoryId) products
     if (!update.isActive) {
       const categoryDoc = await Category.findOne(
         { _id: categoryId, isActive: true },
@@ -150,7 +154,8 @@ router.put("/:id/active", auth, role.check(ROLES.Admin), async (req, res) => {
       success: true,
       message: "Category has been updated successfully!"
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[PUT] - (/category/:id/active):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -170,7 +175,8 @@ router.delete(
         message: `Category has been deleted successfully!`,
         product
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("[DELETE] - (/category/delete/:id):", err);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });

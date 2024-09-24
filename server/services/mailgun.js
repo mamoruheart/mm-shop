@@ -1,7 +1,7 @@
 const Mailgun = require("mailgun-js");
 
-const template = require("../config/template");
 const keys = require("../config/keys");
+const template = require("../config/template");
 
 const { key, domain, sender } = keys.mailgun;
 
@@ -13,7 +13,7 @@ class MailgunService {
         domain
       });
     } catch (err) {
-      console.warn("Missing mailgun keys:", err?.message);
+      console.error("Missing mailgun keys:", err?.message);
     }
   }
 }
@@ -25,7 +25,7 @@ exports.sendEmail = async (email, type, host, data) => {
     const message = prepareTemplate(type, host, data);
 
     const config = {
-      from: `MM Shop! <${sender}>`,
+      from: `Michael’s Machines <${sender}>`,
       to: email,
       subject: message.subject,
       text: message.text

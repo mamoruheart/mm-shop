@@ -10,7 +10,8 @@ module.exports = {
   },
   jwt: {
     secret: process.env.JWT_SECRET,
-    tokenLife: "7d"
+    tokenLife: "7d",
+    myBearerPrefix: process.env.BEARER_PREFIX
   },
   mailchimp: {
     key: process.env.MAILCHIMP_KEY,

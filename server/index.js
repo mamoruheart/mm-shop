@@ -1,7 +1,11 @@
-require("dotenv").config();
 const express = require("express");
-const chalk = require("chalk");
 const cors = require("cors");
+const chalk = require("chalk");
+const dotenv = require("dotenv");
+const path = require("path");
+dotenv.config({
+  path: path.resolve(__dirname, ".env")
+});
 
 const keys = require("./config/keys");
 const routes = require("./routes");

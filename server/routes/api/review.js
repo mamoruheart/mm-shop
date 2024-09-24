@@ -22,14 +22,15 @@ router.post("/add", auth, async (req, res) => {
       message: `Your review has been added successfully and will appear when approved!`,
       review: reviewDoc
     });
-  } catch (error) {
-    return res.status(400).json({
+  } catch (err) {
+    console.error("[POST] - (/review/add):", err);
+    res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch all reviews api
+//-- API: fetch all reviews
 router.get("/", async (req, res) => {
   try {
     const { page = 1, limit = 10 } = req.query;
@@ -56,7 +57,8 @@ router.get("/", async (req, res) => {
       currentPage: Number(page),
       count
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/review/):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -89,7 +91,8 @@ router.get("/:slug", async (req, res) => {
     res.status(200).json({
       reviews
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/review/:slug):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -110,14 +113,15 @@ router.put("/:id", async (req, res) => {
       success: true,
       message: "review has been updated successfully!"
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[PUT] - (/review/:id):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- approve review
+//-- API: approve review
 router.put("/approve/:reviewId", auth, async (req, res) => {
   try {
     const reviewId = req.params.reviewId;
@@ -135,14 +139,15 @@ router.put("/approve/:reviewId", auth, async (req, res) => {
     res.status(200).json({
       success: true
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[PUT] - (/review/approve/:reviewId):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- reject review
+//-- API: reject review
 router.put("/reject/:reviewId", auth, async (req, res) => {
   try {
     const reviewId = req.params.reviewId;
@@ -159,7 +164,8 @@ router.put("/reject/:reviewId", auth, async (req, res) => {
     res.status(200).json({
       success: true
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[PUT] - (/review/reject/:reviewId):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -175,8 +181,9 @@ router.delete("/delete/:id", async (req, res) => {
       message: `review has been deleted successfully!`,
       review
     });
-  } catch (error) {
-    return res.status(400).json({
+  } catch (err) {
+    console.error("[DELETE] - (/review/delete/:id):", err);
+    res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }

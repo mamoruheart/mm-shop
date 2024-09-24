@@ -1,21 +1,22 @@
 const socketio = require("socket.io");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-
 const User = mongoose.model("User");
-const { ROLES } = require("../constants");
+
 const keys = require("../config/keys");
+const { ROLES } = require("../constants");
 const support = require("./support");
 
 const authHandler = async (socket, next) => {
   const { token = null } = socket.handshake.auth;
   if (token) {
+    const { secret, myBearerPrefix } = keys.jwt;
+
     const [authType, tokenValue] = token.trim().split(" ");
-    if (authType !== "Bearer" || !tokenValue) {
+    if (authType !== myBearerPrefix || !tokenValue) {
       return next(new Error("no token"));
     }
 
-    const { secret } = keys.jwt;
     const payload = jwt.verify(tokenValue, secret);
     const id = payload.id.toString();
     const user = await User.findById(id);

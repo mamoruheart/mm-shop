@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const Mongoose = require("mongoose");
 
 const Product = require("../../models/product");
 const Brand = require("../../models/brand");
@@ -19,7 +18,7 @@ const { ROLES } = require("../../constants");
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-//-- fetch product slug api
+//-- API: fetch product slug
 router.get("/item/:slug", async (req, res) => {
   try {
     const slug = req.params.slug;
@@ -43,14 +42,15 @@ router.get("/item/:slug", async (req, res) => {
     res.status(200).json({
       product: productDoc
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/product/item/:slug):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch product name search api
+//-- API: fetch product name search
 router.get("/list/search/:name", async (req, res) => {
   try {
     const name = req.params.name;
@@ -59,7 +59,6 @@ router.get("/list/search/:name", async (req, res) => {
       { name: { $regex: new RegExp(name), $options: "is" }, isActive: true },
       { name: 1, slug: 1, imageUrl: 1, price: 1, _id: 0 }
     );
-
     if (productDoc.length < 0) {
       return res.status(404).json({
         message: "No product found."
@@ -69,14 +68,15 @@ router.get("/list/search/:name", async (req, res) => {
     res.status(200).json({
       products: productDoc
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/product/list/search/:name):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch store products by advanced filters api
+//-- API: fetch store products by advanced filters
 router.get("/list", async (req, res) => {
   try {
     let {
@@ -94,7 +94,7 @@ router.get("/list", async (req, res) => {
     const categoryFilter = category ? { category } : {};
     const basicQuery = getStoreProductsQuery(min, max, rating);
 
-    const userDoc = await checkAuth(req);
+    const userDoc = checkAuth(req);
     const categoryDoc = await Category.findOne({
       slug: categoryFilter.category,
       isActive: true
@@ -115,7 +115,6 @@ router.get("/list", async (req, res) => {
       slug: brand,
       isActive: true
     });
-
     if (brandDoc) {
       basicQuery.push({
         $match: {
@@ -152,8 +151,8 @@ router.get("/list", async (req, res) => {
       currentPage,
       count
     });
-  } catch (error) {
-    console.log("error", error);
+  } catch (err) {
+    console.error("[GET] - (/product/list):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -167,14 +166,15 @@ router.get("/list/select", auth, async (req, res) => {
     res.status(200).json({
       products
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/product/list/select):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- add product api
+//-- API: add product
 router.post(
   "/add",
   auth,
@@ -195,23 +195,19 @@ router.post(
       if (!sku) {
         return res.status(400).json({ error: "You must enter sku." });
       }
-
       if (!description || !name) {
         return res
           .status(400)
           .json({ error: "You must enter description & name." });
       }
-
       if (!quantity) {
         return res.status(400).json({ error: "You must enter a quantity." });
       }
-
       if (!price) {
         return res.status(400).json({ error: "You must enter a price." });
       }
 
       const foundProduct = await Product.findOne({ sku });
-
       if (foundProduct) {
         return res.status(400).json({ error: "This sku is already in use." });
       }
@@ -230,7 +226,6 @@ router.post(
         imageUrl,
         imageKey
       });
-
       const savedProduct = await product.save();
 
       res.status(200).json({
@@ -238,15 +233,16 @@ router.post(
         message: `Product has been added successfully!`,
         product: savedProduct
       });
-    } catch (error) {
-      return res.status(400).json({
+    } catch (err) {
+      console.error("[POST] - (/product/add):", err);
+      res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
     }
   }
 );
 
-//-- fetch products api
+//-- API: fetch products
 router.get(
   "/",
   auth,
@@ -284,7 +280,8 @@ router.get(
       res.status(200).json({
         products
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("[GET] - (/product/):", err);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -292,7 +289,7 @@ router.get(
   }
 );
 
-//-- fetch product api
+//-- API: fetch product
 router.get(
   "/:id",
   auth,
@@ -332,7 +329,8 @@ router.get(
       res.status(200).json({
         product: productDoc
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("[GET] - (/product/:id):", err);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -354,7 +352,6 @@ router.put(
       const foundProduct = await Product.findOne({
         $or: [{ slug }, { sku }]
       });
-
       if (foundProduct && foundProduct._id != productId) {
         return res
           .status(400)
@@ -369,7 +366,8 @@ router.put(
         success: true,
         message: "Product has been updated successfully!"
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("[PUT] - (/product/:id):", err);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -395,7 +393,8 @@ router.put(
         success: true,
         message: "Product has been updated successfully!"
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("[PUT] - (/product/:id/active):", err);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -416,7 +415,8 @@ router.delete(
         message: `Product has been deleted successfully!`,
         product
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("[DELETE] - (/product/delete/:id):", err);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });

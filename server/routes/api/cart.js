@@ -26,7 +26,8 @@ router.post("/add", auth, async (req, res) => {
       success: true,
       cartId: cartDoc.id
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[POST] - (/cart/add):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -40,7 +41,8 @@ router.delete("/delete/:cartId", auth, async (req, res) => {
     res.status(200).json({
       success: true
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[DELETE] - (/cart/delete/:cartId):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -57,7 +59,8 @@ router.post("/add/:cartId", auth, async (req, res) => {
     res.status(200).json({
       success: true
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[POST] - (/cart/add/:cartId):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -74,7 +77,8 @@ router.delete("/delete/:cartId/:productId", auth, async (req, res) => {
     res.status(200).json({
       success: true
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[DELETE] - (/cart/delete/:cartId/:productId):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -82,16 +86,20 @@ router.delete("/delete/:cartId/:productId", auth, async (req, res) => {
 });
 
 const decreaseQuantity = (products) => {
-  let bulkOptions = products.map((item) => {
-    return {
-      updateOne: {
-        filter: { _id: item.product },
-        update: { $inc: { quantity: -item.quantity } }
-      }
-    };
-  });
+  try {
+    let bulkOptions = products.map((item) => {
+      return {
+        updateOne: {
+          filter: { _id: item.product },
+          update: { $inc: { quantity: -item.quantity } }
+        }
+      };
+    });
 
-  Product.bulkWrite(bulkOptions);
+    Product.bulkWrite(bulkOptions);
+  } catch (err) {
+    console.error("decreaseQuantity:", err);
+  }
 };
 
 module.exports = router;

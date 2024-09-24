@@ -34,14 +34,15 @@ router.post("/add", auth, role.check(ROLES.Admin), async (req, res) => {
       message: `Brand has been added successfully!`,
       brand: brandDoc
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[POST] - (/brand/add):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch store brands api
+//-- API: fetch store brands
 router.get("/list", async (req, res) => {
   try {
     const brands = await Brand.find({
@@ -51,14 +52,15 @@ router.get("/list", async (req, res) => {
     res.status(200).json({
       brands
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/brand/list):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch brands api
+//-- API: fetch brands
 router.get(
   "/",
   auth,
@@ -78,7 +80,8 @@ router.get(
       res.status(200).json({
         brands
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("[GET] - (/brand/):", err);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -94,7 +97,6 @@ router.get("/:id", async (req, res) => {
       "merchant",
       "_id"
     );
-
     if (!brandDoc) {
       return res.status(404).json({
         message: `Cannot find brand with the id: ${brandId}.`
@@ -104,7 +106,8 @@ router.get("/:id", async (req, res) => {
     res.status(200).json({
       brand: brandDoc
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/brand/:id):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -133,7 +136,8 @@ router.get(
       res.status(200).json({
         brands
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("[GET] - (/brand/list/select):", err);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -155,7 +159,6 @@ router.put(
       const foundBrand = await Brand.findOne({
         $or: [{ slug }]
       });
-
       if (foundBrand && foundBrand._id != brandId) {
         return res.status(400).json({ error: "Slug is already in use." });
       }
@@ -168,7 +171,8 @@ router.put(
         success: true,
         message: "Brand has been updated successfully!"
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("[PUT] - (/brand/:id):", err);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -186,7 +190,7 @@ router.put(
       const update = req.body.brand;
       const query = { _id: brandId };
 
-      //-- disable brand(brandId) products
+      //-- disable brand (brandId) products
       if (!update.isActive) {
         const products = await Product.find({ brand: brandId });
         store.disableProducts(products);
@@ -200,7 +204,8 @@ router.put(
         success: true,
         message: "Brand has been updated successfully!"
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("[PUT] - (/brand/:id/active):", err);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -216,6 +221,7 @@ router.delete(
     try {
       const brandId = req.params.id;
       await deactivateMerchant(brandId);
+
       const brand = await Brand.deleteOne({ _id: brandId });
 
       res.status(200).json({
@@ -223,7 +229,8 @@ router.delete(
         message: `Brand has been deleted successfully!`,
         brand
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("[DELETE] - (/brand/delete/:id):", err);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -232,21 +239,27 @@ router.delete(
 );
 
 const deactivateMerchant = async (brandId) => {
-  const brandDoc = await Brand.findOne({ _id: brandId }).populate(
-    "merchant",
-    "_id"
-  );
-  if (!brandDoc || !brandDoc.merchant) return;
-  const merchantId = brandDoc.merchant._id;
-  const query = { _id: merchantId };
-  const update = {
-    status: MERCHANT_STATUS.Waiting_Approval,
-    isActive: false,
-    brand: null
-  };
-  return await Merchant.findOneAndUpdate(query, update, {
-    new: true
-  });
+  try {
+    const brandDoc = await Brand.findOne({ _id: brandId }).populate(
+      "merchant",
+      "_id"
+    );
+    if (!brandDoc || !brandDoc.merchant) return;
+
+    const merchantId = brandDoc.merchant._id;
+    const query = { _id: merchantId };
+    const update = {
+      status: MERCHANT_STATUS.Waiting_Approval,
+      isActive: false,
+      brand: null
+    };
+
+    return await Merchant.findOneAndUpdate(query, update, {
+      new: true
+    });
+  } catch (err) {
+    console.error("deactivateMerchant:", err);
+  }
 };
 
 module.exports = router;

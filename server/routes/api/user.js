@@ -6,11 +6,10 @@ const auth = require("../../middleware/auth");
 const role = require("../../middleware/role");
 const { ROLES } = require("../../constants");
 
-//-- search users api
+//-- API: search users
 router.get("/search", auth, role.check(ROLES.Admin), async (req, res) => {
   try {
     const { search } = req.query;
-
     const regex = new RegExp(search, "i");
 
     const users = await User.find(
@@ -27,14 +26,15 @@ router.get("/search", auth, role.check(ROLES.Admin), async (req, res) => {
     res.status(200).json({
       users
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/user/search):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch users api
+//-- API: fetch users
 router.get("/", auth, async (req, res) => {
   try {
     const { page = 1, limit = 10 } = req.query;
@@ -54,7 +54,8 @@ router.get("/", auth, async (req, res) => {
       currentPage: Number(page),
       count
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/user/):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -76,7 +77,8 @@ router.get("/me", auth, async (req, res) => {
     res.status(200).json({
       user: userDoc
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/user/me):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -98,7 +100,8 @@ router.put("/", auth, async (req, res) => {
       message: "Your profile is successfully updated!",
       user: userDoc
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[PUT] - (/user/):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });

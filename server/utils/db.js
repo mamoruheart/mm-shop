@@ -1,4 +1,3 @@
-require("dotenv").config();
 const chalk = require("chalk");
 const mongoose = require("mongoose");
 
@@ -19,7 +18,7 @@ const setupDB = async () => {
       )
       .catch((err) => console.log(err));
   } catch (error) {
-    return null;
+    console.error("setupDB:", error);
   }
 };
 

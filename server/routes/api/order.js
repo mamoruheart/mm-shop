@@ -43,17 +43,18 @@ router.post("/add", auth, async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: `Your order has been placed successfully!`,
+      message: "Your order has been placed successfully!",
       order: { _id: orderDoc._id }
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[POST] - (/order/add):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- search orders api
+//-- API: search orders
 router.get("/search", auth, async (req, res) => {
   try {
     const { search } = req.query;
@@ -108,6 +109,7 @@ router.get("/search", auth, async (req, res) => {
 
       let orders = newOrders.map((o) => store.caculateTaxAmount(o));
       orders.sort((a, b) => b.created - a.created);
+
       res.status(200).json({
         orders
       });
@@ -116,14 +118,15 @@ router.get("/search", auth, async (req, res) => {
         orders: []
       });
     }
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/order/search):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch orders api
+//-- API: fetch orders
 router.get("/", auth, async (req, res) => {
   try {
     const { page = 1, limit = 10 } = req.query;
@@ -151,14 +154,15 @@ router.get("/", auth, async (req, res) => {
       currentPage: Number(page),
       count
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/order/):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch my orders api
+//-- API: fetch my orders
 router.get("/me", auth, async (req, res) => {
   try {
     const { page = 1, limit = 10 } = req.query;
@@ -189,14 +193,15 @@ router.get("/me", auth, async (req, res) => {
       currentPage: Number(page),
       count
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/order/me):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch order api
+//-- API: fetch order
 router.get("/:orderId", auth, async (req, res) => {
   try {
     const orderId = req.params.orderId;
@@ -240,13 +245,13 @@ router.get("/:orderId", auth, async (req, res) => {
       products: orderDoc?.cart?.products,
       cartId: orderDoc.cart._id
     };
-
     order = store.caculateTaxAmount(order);
 
     res.status(200).json({
       order
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/order/:orderId):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -268,7 +273,8 @@ router.delete("/cancel/:orderId", auth, async (req, res) => {
     res.status(200).json({
       success: true
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[DELETE] - (/order/cancel/:orderId):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -327,7 +333,8 @@ router.put("/status/item/:itemId", auth, async (req, res) => {
       success: true,
       message: "Item status has been updated successfully!"
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[PUT] - (/order/status/item/:itemId):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -335,16 +342,20 @@ router.put("/status/item/:itemId", auth, async (req, res) => {
 });
 
 const increaseQuantity = (products) => {
-  let bulkOptions = products.map((item) => {
-    return {
-      updateOne: {
-        filter: { _id: item.product },
-        update: { $inc: { quantity: item.quantity } }
-      }
-    };
-  });
+  try {
+    let bulkOptions = products.map((item) => {
+      return {
+        updateOne: {
+          filter: { _id: item.product },
+          update: { $inc: { quantity: item.quantity } }
+        }
+      };
+    });
 
-  Product.bulkWrite(bulkOptions);
+    Product.bulkWrite(bulkOptions);
+  } catch (err) {
+    console.error("increaseQuantity:", err);
+  }
 };
 
 module.exports = router;

@@ -4,7 +4,7 @@ const router = express.Router();
 const Address = require("../../models/address");
 const auth = require("../../middleware/auth");
 
-//-- add address api
+//-- API: add address
 router.post("/add", auth, async (req, res) => {
   try {
     const user = req.user;
@@ -17,17 +17,18 @@ router.post("/add", auth, async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: `Address has been added successfully!`,
+      message: "Address has been added successfully!",
       address: addressDoc
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[POST] - (/address/add):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
-//-- fetch all addresses api
+//-- API: fetch all addresses
 router.get("/", auth, async (req, res) => {
   try {
     const addresses = await Address.find({ user: req.user._id });
@@ -35,7 +36,8 @@ router.get("/", auth, async (req, res) => {
     res.status(200).json({
       addresses
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/address/):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -47,7 +49,6 @@ router.get("/:id", async (req, res) => {
     const addressId = req.params.id;
 
     const addressDoc = await Address.findOne({ _id: addressId });
-
     if (!addressDoc) {
       res.status(404).json({
         message: `Cannot find Address with the id: ${addressId}.`
@@ -57,7 +58,8 @@ router.get("/:id", async (req, res) => {
     res.status(200).json({
       address: addressDoc
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[GET] - (/address/:id):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -78,7 +80,8 @@ router.put("/:id", async (req, res) => {
       success: true,
       message: "Address has been updated successfully!"
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[PUT] - (/address/:id):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -94,7 +97,8 @@ router.delete("/delete/:id", async (req, res) => {
       message: `Address has been deleted successfully!`,
       address
     });
-  } catch (error) {
+  } catch (err) {
+    console.error("[DELETE] - (/address/delete/:id):", err);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });

@@ -24,7 +24,9 @@ const seedDB = async () => {
 
     console.log(`${chalk.blue("✓")} ${chalk.blue("Seed database started")}`);
 
-    if (!email || !password) throw new Error("Missing arguments");
+    if (!email || !password) {
+      throw new Error("Missing arguments");
+    }
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
       console.log(
@@ -125,11 +127,11 @@ const seedDB = async () => {
         )}`
       );
     }
-  } catch (error) {
+  } catch (err) {
     console.log(
       `${chalk.red("x")} ${chalk.red("Error while seeding database")}`
     );
-    console.log(error);
+    console.log(err);
     return null;
   } finally {
     await mongoose.connection.close();
@@ -143,7 +145,7 @@ const seedDB = async () => {
   try {
     await setupDB();
     await seedDB();
-  } catch (error) {
-    console.error(`Error initializing database: ${error.message}`);
+  } catch (err) {
+    console.error(`Error initializing database: ${err.message}`);
   }
 })();

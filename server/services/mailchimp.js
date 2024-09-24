@@ -9,7 +9,7 @@ class MailchimpService {
     try {
       return new Mailchimp(key);
     } catch (err) {
-      console.warn("Missing mailchimp keys:", err?.message);
+      console.error("Missing mailchimp keys:", err?.message);
     }
   }
 }
