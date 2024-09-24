@@ -1,4 +1,5 @@
 const Mongoose = require("mongoose");
+
 const { Schema } = Mongoose;
 
 const WishlistSchema = new Schema({

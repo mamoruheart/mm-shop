@@ -4,6 +4,6 @@ exports.asyncForEach = async (array, callback) => {
       await callback(array[idx], idx, array);
     }
   } catch (err) {
-    console.error("Error during async iteration:", err);
+    console.error("Error during async iteration:", err?.message);
   }
 };

@@ -11,6 +11,7 @@ const keys = require("./config/keys");
 const routes = require("./routes");
 const socket = require("./socket");
 const setupDB = require("./utils/db");
+const myPassport = require("./config/passport");
 
 const { port } = keys;
 const app = express();
@@ -20,7 +21,8 @@ app.use(express.json());
 app.use(cors());
 
 setupDB();
-require("./config/passport")(app);
+myPassport(app);
+
 app.use(routes);
 
 const server = app.listen(port, () => {

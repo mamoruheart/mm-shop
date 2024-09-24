@@ -14,7 +14,7 @@ exports.disableProducts = (products) => {
 
     Product.bulkWrite(bulkOptions);
   } catch (err) {
-    console.error("disableProducts:", err);
+    console.error("disableProducts:", err?.message);
   }
 };
 
@@ -52,13 +52,11 @@ exports.caculateTaxAmount = (order) => {
     const hasCancelledItems = order.products.filter(
       (item) => item.status === "Cancelled"
     );
-
     if (hasCancelledItems.length > 0) {
       order.total = this.caculateOrderTotal(order);
     }
 
     const currentTotal = this.caculateOrderTotal(order);
-
     if (currentTotal !== order.total) {
       order.total = this.caculateOrderTotal(order);
     }
@@ -72,7 +70,7 @@ exports.caculateTaxAmount = (order) => {
 
     return order;
   } catch (err) {
-    console.error("caculateTaxAmount:", err);
+    console.error("caculateTaxAmount:", err?.message);
     return order;
   }
 };
@@ -85,7 +83,7 @@ exports.caculateOrderTotal = (order) => {
 
     return total;
   } catch (err) {
-    console.error("caculateOrderTotal:", err);
+    console.error("caculateOrderTotal:", err?.message);
     return null;
   }
 };
@@ -118,7 +116,7 @@ exports.caculateItemsSalesTax = (items) => {
 
     return products;
   } catch (err) {
-    console.error("caculateItemsSalesTax:", err);
+    console.error("caculateItemsSalesTax:", err?.message);
     return null;
   }
 };
@@ -138,7 +136,7 @@ exports.formatOrders = (orders) => {
       return order?.products ? this.caculateTaxAmount(order) : order;
     });
   } catch (err) {
-    console.error("formatOrders:", err);
+    console.error("formatOrders:", err?.message);
     return null;
   }
 };

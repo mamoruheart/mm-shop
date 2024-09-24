@@ -20,8 +20,8 @@ const checkAuth = (req) => {
 
     const decoded = jwt.verify(token, secret);
     return decoded;
-  } catch (error) {
-    console.error("checkAuth:", error);
+  } catch (err) {
+    console.error("checkAuth:", err?.message);
     return null;
   }
 };

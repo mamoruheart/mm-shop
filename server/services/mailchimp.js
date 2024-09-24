@@ -22,7 +22,8 @@ exports.subscribeToNewsletter = async (email) => {
       email_address: email,
       status: "subscribed"
     });
-  } catch (error) {
-    return error;
+  } catch (err) {
+    console.error("subscribeToNewsletter:", err?.message);
+    return err;
   }
 };

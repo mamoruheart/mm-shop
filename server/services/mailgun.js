@@ -32,48 +32,54 @@ exports.sendEmail = async (email, type, host, data) => {
     };
 
     return await mailgun.messages().send(config);
-  } catch (error) {
-    return error;
+  } catch (err) {
+    console.error("sendEmail:", err?.message);
+    return err;
   }
 };
 
 const prepareTemplate = (type, host, data) => {
-  let message;
+  try {
+    let message = {};
 
-  switch (type) {
-    case "reset":
-      message = template.resetEmail(host, data);
-      break;
-    case "reset-confirmation":
-      message = template.confirmResetPasswordEmail();
-      break;
-    case "signup":
-      message = template.signupEmail(data);
-      break;
-    case "merchant-signup":
-      message = template.merchantSignup(host, data);
-      break;
-    case "merchant-welcome":
-      message = template.merchantWelcome(data);
-      break;
-    case "newsletter-subscription":
-      message = template.newsletterSubscriptionEmail();
-      break;
-    case "contact":
-      message = template.contactEmail();
-      break;
-    case "merchant-application":
-      message = template.merchantApplicationEmail();
-      break;
-    case "merchant-deactivate-account":
-      message = template.merchantDeactivateAccount();
-      break;
-    case "order-confirmation":
-      message = template.orderConfirmationEmail(data);
-      break;
-    default:
-      message = "";
+    switch (type) {
+      case "reset":
+        message = template.resetEmail(host, data);
+        break;
+      case "reset-confirmation":
+        message = template.confirmResetPasswordEmail();
+        break;
+      case "signup":
+        message = template.signupEmail(data);
+        break;
+      case "merchant-signup":
+        message = template.merchantSignup(host, data);
+        break;
+      case "merchant-welcome":
+        message = template.merchantWelcome(data);
+        break;
+      case "newsletter-subscription":
+        message = template.newsletterSubscriptionEmail();
+        break;
+      case "contact":
+        message = template.contactEmail();
+        break;
+      case "merchant-application":
+        message = template.merchantApplicationEmail();
+        break;
+      case "merchant-deactivate-account":
+        message = template.merchantDeactivateAccount();
+        break;
+      case "order-confirmation":
+        message = template.orderConfirmationEmail(data);
+        break;
+      default:
+        console.log("prepareTemplate - no matching case:", type);
+    }
+
+    return message;
+  } catch (err) {
+    console.error("prepareTemplate:", err?.message);
+    return {};
   }
-
-  return message;
 };

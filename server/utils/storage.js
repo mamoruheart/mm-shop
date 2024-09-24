@@ -33,7 +33,7 @@ exports.s3Upload = async (image) => {
 
     return { imageUrl, imageKey };
   } catch (err) {
-    console.error("s3Upload:", err);
+    console.error("s3Upload:", err?.message);
     return { imageUrl: "", imageKey: "" };
   }
 };

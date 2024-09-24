@@ -82,7 +82,7 @@ exports.getStoreProductsQuery = (min, max, rating) => {
 
     return basicQuery;
   } catch (err) {
-    console.error("getStoreProductsQuery:", err);
+    console.error("getStoreProductsQuery:", err?.message);
     return null;
   }
 };
@@ -116,7 +116,7 @@ exports.getStoreProductsWishListQuery = (userId) => {
 
     return wishListQuery;
   } catch (err) {
-    console.error("getStoreProductsWishListQuery:", err);
+    console.error("getStoreProductsWishListQuery:", err?.message);
     return null;
   }
 };

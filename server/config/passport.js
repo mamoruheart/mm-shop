@@ -10,9 +10,9 @@ const keys = require("./keys");
 const { EMAIL_PROVIDER } = require("../constants");
 
 const { google, apple } = keys;
+const { secret } = keys.jwt;
 
 const User = mongoose.model("User");
-const secret = keys.jwt.secret;
 
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -72,7 +72,6 @@ const googleAuth = async () => {
                 if (err) {
                   return done(err, false);
                 }
-
                 return done(null, user);
               });
             })
@@ -82,8 +81,8 @@ const googleAuth = async () => {
         }
       )
     );
-  } catch (error) {
-    console.log("Missing google keys");
+  } catch (err) {
+    console.error("[googleAuth] Missing google keys:", err?.message);
   }
 };
 
@@ -123,7 +122,6 @@ const appleAuth = async () => {
                 if (err) {
                   return done(err, false);
                 }
-
                 return done(null, user);
               });
             })
@@ -133,7 +131,7 @@ const appleAuth = async () => {
         }
       )
     );
-  } catch (error) {
-    console.log("Missing apple keys");
+  } catch (err) {
+    console.error("[appleAuth] Missing apple keys:", err?.message);
   }
 };

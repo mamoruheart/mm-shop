@@ -1,5 +1,6 @@
 const Mongoose = require("mongoose");
 const slug = require("mongoose-slug-generator");
+
 const { Schema } = Mongoose;
 
 const options = {
@@ -7,7 +8,6 @@ const options = {
   lang: "en",
   truncate: 120
 };
-
 Mongoose.plugin(slug, options);
 
 const BrandSchema = new Schema({

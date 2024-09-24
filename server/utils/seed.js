@@ -21,12 +21,12 @@ const NUM_CATEGORIES = 10;
 const seedDB = async () => {
   try {
     let categories = [];
-
     console.log(`${chalk.blue("✓")} ${chalk.blue("Seed database started")}`);
 
     if (!email || !password) {
       throw new Error("Missing arguments");
     }
+
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
       console.log(
@@ -146,6 +146,6 @@ const seedDB = async () => {
     await setupDB();
     await seedDB();
   } catch (err) {
-    console.error(`Error initializing database: ${err.message}`);
+    console.error(`Error initializing database: ${err?.message}`);
   }
 })();
