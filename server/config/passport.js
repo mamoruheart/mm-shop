@@ -1,6 +1,6 @@
 const passport = require("passport");
 const { Strategy: JwtStrategy } = require("passport-jwt");
-const { Strategy: GoogleStrategy } = require("passport-google-oauth2");
+const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
 const { Strategy: AppleStrategy } = require("passport-apple");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -9,7 +9,7 @@ const keys = require("./keys");
 const { EMAIL_PROVIDER } = require("../constants");
 
 const { google, apple } = keys;
-const { secret, myBearerPrefix } = keys.jwt;
+const { jwtSecret, myBearerPrefix } = keys.jwt;
 
 const User = mongoose.model("User");
 
@@ -32,7 +32,7 @@ const myBearerExtractor = (req) => {
 
 const opts = {
   jwtFromRequest: myBearerExtractor,
-  secretOrKey: secret
+  secretOrKey: jwtSecret
 };
 
 passport.use(
@@ -44,17 +44,19 @@ passport.use(
       }
       return done(null, false);
     } catch (err) {
+      console.error("JwtStrategy:", err?.message);
       return done(err, false);
     }
   })
 );
 
-module.exports = async (app) => {
-  app.use(passport.initialize());
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
 
-  await googleAuth();
-  await appleAuth();
-};
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
 
 const googleAuth = async () => {
   try {
@@ -65,35 +67,30 @@ const googleAuth = async () => {
           clientSecret: google.clientSecret,
           callbackURL: google.callbackURL
         },
-        (accessToken, refreshToken, profile, done) => {
-          User.findOne({ email: profile.email })
-            .then((user) => {
-              if (user) {
-                return done(null, user);
-              }
+        async (_accessToken, _refreshToken, profile, done) => {
+          try {
+            console.log("GoogleStrategy:", profile);
 
-              const name = profile.displayName.split(" ");
-
-              const newUser = new User({
+            let user = null;
+            user = await User.findOne({ googleId: profile.id });
+            if (!user) {
+              user = new User({
                 provider: EMAIL_PROVIDER.Google,
                 googleId: profile.id,
-                email: profile.email,
-                firstName: name[0],
-                lastName: name[1],
-                avatar: profile.picture,
+                email: profile.emails?.[0].value,
+                firstName: profile.name?.givenName,
+                lastName: profile.name?.familyName,
+                avatar: profile.photos?.[0].value,
                 password: null
               });
+              await user.save();
+            }
 
-              newUser.save((err, user) => {
-                if (err) {
-                  return done(err, false);
-                }
-                return done(null, user);
-              });
-            })
-            .catch((err) => {
-              return done(err, false);
-            });
+            return done(null, user);
+          } catch (error) {
+            console.error("GoogleStrategy:", error?.message);
+            return done(error, false);
+          }
         }
       )
     );
@@ -150,4 +147,12 @@ const appleAuth = async () => {
   } catch (err) {
     console.error("[appleAuth] Missing apple keys:", err?.message);
   }
+};
+
+module.exports = async (app) => {
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  await googleAuth();
+  await appleAuth();
 };

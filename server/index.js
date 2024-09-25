@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const chalk = require("chalk");
+const session = require("express-session");
 const dotenv = require("dotenv");
 const path = require("path");
 dotenv.config({
@@ -14,11 +15,20 @@ const setupDB = require("./utils/db");
 const myPassport = require("./config/passport");
 
 const { port } = keys;
+const { sessSecret } = keys.jwt;
+
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+app.use(
+  session({
+    secret: sessSecret,
+    resave: false,
+    saveUninitialized: false
+  })
+);
 
 setupDB();
 myPassport(app);
@@ -33,4 +43,7 @@ const server = app.listen(port, () => {
   );
 });
 
+/**
+ * socket is used for `auth` and `support chat`
+ */
 socket(server);

@@ -9,9 +9,10 @@ module.exports = {
     url: process.env.MONGO_URI
   },
   jwt: {
-    secret: process.env.JWT_SECRET,
+    jwtSecret: process.env.JWT_SECRET,
     tokenLife: "7d",
-    myBearerPrefix: process.env.BEARER_PREFIX
+    myBearerPrefix: process.env.BEARER_PREFIX,
+    sessSecret: process.env.SESSION_SECRET
   },
   mailchimp: {
     key: process.env.MAILCHIMP_KEY,

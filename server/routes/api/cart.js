@@ -27,7 +27,7 @@ router.post("/add", auth, async (req, res) => {
       cartId: cartDoc.id
     });
   } catch (err) {
-    console.error("[POST] - (/cart/add):", err);
+    console.error("[POST] - (/cart/add):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -42,7 +42,7 @@ router.delete("/delete/:cartId", auth, async (req, res) => {
       success: true
     });
   } catch (err) {
-    console.error("[DELETE] - (/cart/delete/:cartId):", err);
+    console.error("[DELETE] - (/cart/delete/:cartId):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -60,7 +60,7 @@ router.post("/add/:cartId", auth, async (req, res) => {
       success: true
     });
   } catch (err) {
-    console.error("[POST] - (/cart/add/:cartId):", err);
+    console.error("[POST] - (/cart/add/:cartId):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -78,7 +78,10 @@ router.delete("/delete/:cartId/:productId", auth, async (req, res) => {
       success: true
     });
   } catch (err) {
-    console.error("[DELETE] - (/cart/delete/:cartId/:productId):", err);
+    console.error(
+      "[DELETE] - (/cart/delete/:cartId/:productId):",
+      err?.message
+    );
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -98,7 +101,7 @@ const decreaseQuantity = (products) => {
 
     Product.bulkWrite(bulkOptions);
   } catch (err) {
-    console.error("decreaseQuantity:", err);
+    console.error("decreaseQuantity:", err?.message);
   }
 };
 

@@ -35,7 +35,7 @@ router.post("/add", auth, role.check(ROLES.Admin), async (req, res) => {
       brand: brandDoc
     });
   } catch (err) {
-    console.error("[POST] - (/brand/add):", err);
+    console.error("[POST] - (/brand/add):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -53,7 +53,7 @@ router.get("/list", async (req, res) => {
       brands
     });
   } catch (err) {
-    console.error("[GET] - (/brand/list):", err);
+    console.error("[GET] - (/brand/list):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -81,7 +81,7 @@ router.get(
         brands
       });
     } catch (err) {
-      console.error("[GET] - (/brand/):", err);
+      console.error("[GET] - (/brand/):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -107,7 +107,7 @@ router.get("/:id", async (req, res) => {
       brand: brandDoc
     });
   } catch (err) {
-    console.error("[GET] - (/brand/:id):", err);
+    console.error("[GET] - (/brand/:id):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -137,7 +137,7 @@ router.get(
         brands
       });
     } catch (err) {
-      console.error("[GET] - (/brand/list/select):", err);
+      console.error("[GET] - (/brand/list/select):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -172,7 +172,7 @@ router.put(
         message: "Brand has been updated successfully!"
       });
     } catch (err) {
-      console.error("[PUT] - (/brand/:id):", err);
+      console.error("[PUT] - (/brand/:id):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -205,7 +205,7 @@ router.put(
         message: "Brand has been updated successfully!"
       });
     } catch (err) {
-      console.error("[PUT] - (/brand/:id/active):", err);
+      console.error("[PUT] - (/brand/:id/active):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -230,7 +230,7 @@ router.delete(
         brand
       });
     } catch (err) {
-      console.error("[DELETE] - (/brand/delete/:id):", err);
+      console.error("[DELETE] - (/brand/delete/:id):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -258,7 +258,7 @@ const deactivateMerchant = async (brandId) => {
       new: true
     });
   } catch (err) {
-    console.error("deactivateMerchant:", err);
+    console.error("deactivateMerchant:", err?.message);
   }
 };
 

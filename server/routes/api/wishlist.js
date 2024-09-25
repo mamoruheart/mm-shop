@@ -41,7 +41,7 @@ router.post("/", auth, async (req, res) => {
       });
     }
   } catch (err) {
-    console.error("[POST] - (/wishlist/):", err);
+    console.error("[POST] - (/wishlist/):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -64,7 +64,7 @@ router.get("/", auth, async (req, res) => {
       wishlist
     });
   } catch (err) {
-    console.error("[GET] - (/wishlist/):", err);
+    console.error("[GET] - (/wishlist/):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });

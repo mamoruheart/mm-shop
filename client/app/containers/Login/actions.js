@@ -56,7 +56,7 @@ export const login = () => {
       const firstName = response.data.user.firstName;
 
       const successfulOptions = {
-        title: `Hey${firstName || ""}, Welcome Back!`,
+        title: `Hi ${firstName || ""}, Welcome Back!`,
         position: "tr",
         autoDismiss: 3
       };

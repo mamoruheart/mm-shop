@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const keys = require("../config/keys");
-const { secret, myBearerPrefix } = keys.jwt;
+const { jwtSecret, myBearerPrefix } = keys.jwt;
 
 const checkAuth = (req) => {
   try {
@@ -18,7 +18,7 @@ const checkAuth = (req) => {
       return null;
     }
 
-    const decoded = jwt.verify(token, secret);
+    const decoded = jwt.verify(token, jwtSecret);
     return decoded;
   } catch (err) {
     console.error("checkAuth:", err?.message);

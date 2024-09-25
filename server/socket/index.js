@@ -12,14 +12,14 @@ const authHandler = async (socket, next) => {
   try {
     const { token = null } = socket.handshake.auth;
     if (token) {
-      const { secret, myBearerPrefix } = keys.jwt;
+      const { jwtSecret, myBearerPrefix } = keys.jwt;
 
       const [authType, tokenValue] = token.trim().split(" ");
       if (authType !== myBearerPrefix || !tokenValue) {
         return next(new Error("no token"));
       }
 
-      const payload = jwt.verify(tokenValue, secret);
+      const payload = jwt.verify(tokenValue, jwtSecret);
       const id = payload.id.toString();
       const user = await User.findById(id);
       if (!user) {

@@ -47,7 +47,7 @@ router.post("/add", async (req, res) => {
       contact: contactDoc
     });
   } catch (err) {
-    console.error("[POST] - (/contact/add):", err);
+    console.error("[POST] - (/contact/add):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
