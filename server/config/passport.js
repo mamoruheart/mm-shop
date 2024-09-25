@@ -69,7 +69,7 @@ const googleAuth = async () => {
         },
         async (_accessToken, _refreshToken, profile, done) => {
           try {
-            console.log("GoogleStrategy:", profile);
+            // console.log("GoogleStrategy:", profile);
 
             let user = null;
             user = await User.findOne({ googleId: profile.id });

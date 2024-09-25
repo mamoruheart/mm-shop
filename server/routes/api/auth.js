@@ -286,15 +286,6 @@ router.post("/reset", auth, async (req, res) => {
   }
 });
 
-// router.get(
-//   "/google",
-//   passport.authenticate("google", {
-//     scope: ["profile", "email"],
-//     session: false,
-//     accessType: "offline",
-//     approvalPrompt: "force"
-//   })
-// );
 router.get(
   "/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
