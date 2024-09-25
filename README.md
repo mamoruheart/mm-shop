@@ -64,6 +64,12 @@ Create `.env` file for both **client** and **server**. See examples:
 
 - [Backend ENV](server/.env.example)
 
+### Google Auth (OAuth2.0) `JSON` file
+
+Create `client_secret_xxx_.json` file for **server**. See examples:
+
+- [Google Auth JSON file](server/client_secret.apps.googleusercontent.com.json.example)
+
 ### Apple `AuthKey` file - `*.p8`
 
 Create `.p8` file for **server**. See examples:

@@ -29,34 +29,34 @@ export const loginChange = (name, value) => {
 
 export const login = () => {
   return async (dispatch, getState) => {
-    const rules = {
-      email: "required|email",
-      password: "required|min:6"
-    };
-
-    const user = getState().login.loginFormData;
-
-    const { isValid, errors } = allFieldsValidation(user, rules, {
-      "required.email": "Email is required.",
-      "email.email": "Email format is invalid.",
-      "required.password": "Password is required.",
-      "min.password": "Password must be at least 6 characters."
-    });
-
-    if (!isValid) {
-      return dispatch({ type: SET_LOGIN_FORM_ERRORS, payload: errors });
-    }
-
-    dispatch({ type: SET_LOGIN_SUBMITTING, payload: true });
-    dispatch({ type: SET_LOGIN_LOADING, payload: true });
-
     try {
+      const rules = {
+        email: "required|email",
+        password: "required|min:6"
+      };
+
+      const user = getState().login.loginFormData;
+
+      const { isValid, errors } = allFieldsValidation(user, rules, {
+        "required.email": "Email is required.",
+        "email.email": "Email format is invalid.",
+        "required.password": "Password is required.",
+        "min.password": "Password must be at least 6 characters."
+      });
+
+      if (!isValid) {
+        return dispatch({ type: SET_LOGIN_FORM_ERRORS, payload: errors });
+      }
+
+      dispatch({ type: SET_LOGIN_SUBMITTING, payload: true });
+      dispatch({ type: SET_LOGIN_LOADING, payload: true });
+
       const response = await axios.post(`${API_URL}/auth/login`, user);
 
       const firstName = response.data.user.firstName;
 
       const successfulOptions = {
-        title: `Hey${firstName ? ` ${firstName}` : ""}, Welcome Back!`,
+        title: `Hi ${firstName || ""}, Welcome Back!`,
         position: "tr",
         autoDismiss: 3
       };
@@ -69,9 +69,10 @@ export const login = () => {
       dispatch(success(successfulOptions));
 
       dispatch({ type: LOGIN_RESET });
-    } catch (error) {
+    } catch (err) {
+      console.error("login:", err?.message);
       const title = `Please try to login again!`;
-      handleError(error, dispatch, title);
+      handleError(err, dispatch, title);
     } finally {
       dispatch({ type: SET_LOGIN_SUBMITTING, payload: false });
       dispatch({ type: SET_LOGIN_LOADING, payload: false });

@@ -56,7 +56,7 @@ router.post("/add", async (req, res) => {
       merchant: merchantDoc
     });
   } catch (err) {
-    console.error("[POST] - (/merchant/add):", err);
+    console.error("[POST] - (/merchant/add):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -83,7 +83,7 @@ router.get("/search", auth, role.check(ROLES.Admin), async (req, res) => {
       merchants
     });
   } catch (err) {
-    console.error("[GET] - (/merchant/search):", err);
+    console.error("[GET] - (/merchant/search):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -111,7 +111,7 @@ router.get("/", auth, role.check(ROLES.Admin), async (req, res) => {
       count
     });
   } catch (err) {
-    console.error("[GET] - (/merchant/):", err);
+    console.error("[GET] - (/merchant/):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -138,7 +138,7 @@ router.put("/:id/active", auth, async (req, res) => {
       success: true
     });
   } catch (err) {
-    console.error("[PUT] - (/merchant/:id/active):", err);
+    console.error("[PUT] - (/merchant/:id/active):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -170,7 +170,7 @@ router.put("/approve/:id", auth, async (req, res) => {
       success: true
     });
   } catch (err) {
-    console.error("[PUT] - (/merchant/approve/:id):", err);
+    console.error("[PUT] - (/merchant/approve/:id):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -195,7 +195,7 @@ router.put("/reject/:id", auth, async (req, res) => {
       success: true
     });
   } catch (err) {
-    console.error("[PUT] - (/merchant/reject/:id):", err);
+    console.error("[PUT] - (/merchant/reject/:id):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -248,7 +248,7 @@ router.post("/signup/:token", async (req, res) => {
       success: true
     });
   } catch (err) {
-    console.error("[POST] - (/merchant/signup/:token):", err);
+    console.error("[POST] - (/merchant/signup/:token):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -271,7 +271,7 @@ router.delete(
         merchant
       });
     } catch (err) {
-      console.error("[DELETE] - (/merchant/delete/:id):", err);
+      console.error("[DELETE] - (/merchant/delete/:id):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -297,7 +297,7 @@ const deactivateBrand = async (merchantId) => {
       new: true
     });
   } catch (err) {
-    console.error("deactivateBrand:", err);
+    console.error("deactivateBrand:", err?.message);
   }
 };
 
@@ -317,7 +317,7 @@ const createMerchantBrand = async ({ _id, brandName, business }) => {
     };
     await Merchant.findOneAndUpdate({ _id }, update);
   } catch (err) {
-    console.error("createMerchantBrand:", err);
+    console.error("createMerchantBrand:", err?.message);
   }
 };
 
@@ -368,7 +368,7 @@ const createMerchantUser = async (email, name, merchant, host) => {
       return await user.save();
     }
   } catch (err) {
-    console.error("createMerchantUser:", err);
+    console.error("createMerchantUser:", err?.message);
   }
 };
 

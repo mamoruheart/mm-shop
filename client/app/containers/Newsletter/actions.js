@@ -49,8 +49,9 @@ export const subscribeToNewsletter = () => {
 
       dispatch({ type: NEWSLETTER_RESET });
       dispatch(success(successfulOptions));
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("subscribeToNewsletter:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };

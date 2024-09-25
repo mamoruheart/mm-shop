@@ -35,7 +35,7 @@ router.post("/add", auth, role.check(ROLES.Admin), async (req, res) => {
       category: categoryDoc
     });
   } catch (err) {
-    console.error("[POST] - (/category/add):", err);
+    console.error("[POST] - (/category/add):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -51,7 +51,7 @@ router.get("/list", async (req, res) => {
       categories
     });
   } catch (err) {
-    console.error("[GET] - (/category/list):", err);
+    console.error("[GET] - (/category/list):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -67,7 +67,7 @@ router.get("/", async (req, res) => {
       categories
     });
   } catch (err) {
-    console.error("[GET] - (/category/):", err);
+    console.error("[GET] - (/category/):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -93,7 +93,7 @@ router.get("/:id", async (req, res) => {
       category: categoryDoc
     });
   } catch (err) {
-    console.error("[GET] - (/category/:id):", err);
+    console.error("[GET] - (/category/:id):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -123,7 +123,7 @@ router.put("/:id", auth, role.check(ROLES.Admin), async (req, res) => {
       message: "Category has been updated successfully!"
     });
   } catch (err) {
-    console.error("[PUT] - (/category/:id):", err);
+    console.error("[PUT] - (/category/:id):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -155,7 +155,7 @@ router.put("/:id/active", auth, role.check(ROLES.Admin), async (req, res) => {
       message: "Category has been updated successfully!"
     });
   } catch (err) {
-    console.error("[PUT] - (/category/:id/active):", err);
+    console.error("[PUT] - (/category/:id/active):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -176,7 +176,7 @@ router.delete(
         product
       });
     } catch (err) {
-      console.error("[DELETE] - (/category/delete/:id):", err);
+      console.error("[DELETE] - (/category/delete/:id):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });

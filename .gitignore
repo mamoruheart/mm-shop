@@ -17,5 +17,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log* 
 
-### Apple auth
+### Google Auth (OAuth2.0)
+client_secret.apps.googleusercontent.com.json
+
+### Apple Auth
 *.p8

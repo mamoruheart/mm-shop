@@ -21,7 +21,7 @@ router.post("/add", auth, async (req, res) => {
       address: addressDoc
     });
   } catch (err) {
-    console.error("[POST] - (/address/add):", err);
+    console.error("[POST] - (/address/add):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -37,7 +37,7 @@ router.get("/", auth, async (req, res) => {
       addresses
     });
   } catch (err) {
-    console.error("[GET] - (/address/):", err);
+    console.error("[GET] - (/address/):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -59,7 +59,7 @@ router.get("/:id", async (req, res) => {
       address: addressDoc
     });
   } catch (err) {
-    console.error("[GET] - (/address/:id):", err);
+    console.error("[GET] - (/address/:id):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -81,7 +81,7 @@ router.put("/:id", async (req, res) => {
       message: "Address has been updated successfully!"
     });
   } catch (err) {
-    console.error("[PUT] - (/address/:id):", err);
+    console.error("[PUT] - (/address/:id):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -98,7 +98,7 @@ router.delete("/delete/:id", async (req, res) => {
       address
     });
   } catch (err) {
-    console.error("[DELETE] - (/address/delete/:id):", err);
+    console.error("[DELETE] - (/address/delete/:id):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });

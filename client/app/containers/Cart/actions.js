@@ -150,8 +150,9 @@ export const getCartId = () => {
 
         dispatch(setCartId(response.data.cartId));
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("getCartId:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };

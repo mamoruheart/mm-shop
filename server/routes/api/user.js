@@ -27,7 +27,7 @@ router.get("/search", auth, role.check(ROLES.Admin), async (req, res) => {
       users
     });
   } catch (err) {
-    console.error("[GET] - (/user/search):", err);
+    console.error("[GET] - (/user/search):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -55,7 +55,7 @@ router.get("/", auth, async (req, res) => {
       count
     });
   } catch (err) {
-    console.error("[GET] - (/user/):", err);
+    console.error("[GET] - (/user/):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -78,7 +78,7 @@ router.get("/me", auth, async (req, res) => {
       user: userDoc
     });
   } catch (err) {
-    console.error("[GET] - (/user/me):", err);
+    console.error("[GET] - (/user/me):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -101,7 +101,7 @@ router.put("/", auth, async (req, res) => {
       user: userDoc
     });
   } catch (err) {
-    console.error("[PUT] - (/user/):", err);
+    console.error("[PUT] - (/user/):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });

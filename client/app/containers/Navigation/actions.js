@@ -37,10 +37,10 @@ export const onSearch = (v) => {
 };
 
 export const onSuggestionsFetchRequested = (value) => {
-  const inputValue = value.value.trim().toLowerCase();
-
   return async (dispatch, getState) => {
     try {
+      const inputValue = value.value.trim().toLowerCase();
+
       if (inputValue && inputValue.length % 3 === 0) {
         const response = await axios.get(
           `${API_URL}/product/list/search/${inputValue}`
@@ -50,8 +50,9 @@ export const onSuggestionsFetchRequested = (value) => {
           payload: response.data.products
         });
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("onSuggestionsFetchRequested:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };

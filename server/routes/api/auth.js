@@ -12,7 +12,7 @@ const mailchimp = require("../../services/mailchimp");
 const mailgun = require("../../services/mailgun");
 const { EMAIL_PROVIDER } = require("../../constants");
 
-const { secret, tokenLife, myBearerPrefix } = keys.jwt;
+const { jwtSecret, tokenLife, myBearerPrefix } = keys.jwt;
 const { key, listKey } = keys.mailchimp;
 
 router.post("/login", async (req, res) => {
@@ -51,7 +51,7 @@ router.post("/login", async (req, res) => {
     const payload = {
       id: user.id
     };
-    const token = jwt.sign(payload, secret, { expiresIn: tokenLife });
+    const token = jwt.sign(payload, jwtSecret, { expiresIn: tokenLife });
     if (!token) {
       throw new Error("Failed to sign token");
     }
@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
       }
     });
   } catch (err) {
-    console.error("[POST] - (/auth/login):", err);
+    console.error("[POST] - (/auth/login):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -132,7 +132,7 @@ router.post("/register", async (req, res) => {
       registeredUser
     );
 
-    const token = jwt.sign(payload, secret, { expiresIn: tokenLife });
+    const token = jwt.sign(payload, jwtSecret, { expiresIn: tokenLife });
 
     res.status(200).json({
       success: true,
@@ -147,7 +147,7 @@ router.post("/register", async (req, res) => {
       }
     });
   } catch (err) {
-    console.error("[POST] - (/auth/register):", err);
+    console.error("[POST] - (/auth/register):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -190,7 +190,7 @@ router.post("/forgot", async (req, res) => {
       message: "Please check your email for the link to reset your password."
     });
   } catch (err) {
-    console.error("[POST] - (/auth/forgot):", err);
+    console.error("[POST] - (/auth/forgot):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -232,7 +232,7 @@ router.post("/reset/:token", async (req, res) => {
         "Password changed successfully. Please login with your new password."
     });
   } catch (err) {
-    console.error("[POST] - (/auth/reset/:token):", err);
+    console.error("[POST] - (/auth/reset/:token):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -279,21 +279,25 @@ router.post("/reset", auth, async (req, res) => {
         "Password changed successfully. Please login with your new password."
     });
   } catch (err) {
-    console.error("[POST] - (/auth/reset):", err);
+    console.error("[POST] - (/auth/reset):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
   }
 });
 
+// router.get(
+//   "/google",
+//   passport.authenticate("google", {
+//     scope: ["profile", "email"],
+//     session: false,
+//     accessType: "offline",
+//     approvalPrompt: "force"
+//   })
+// );
 router.get(
   "/google",
-  passport.authenticate("google", {
-    session: false,
-    scope: ["profile", "email"],
-    accessType: "offline",
-    approvalPrompt: "force"
-  })
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 router.get(
@@ -307,12 +311,12 @@ router.get(
       const payload = {
         id: req.user.id
       };
-      //-- TODO find another way to send the token to frontend
-      const token = jwt.sign(payload, secret, { expiresIn: tokenLife });
+      const token = jwt.sign(payload, jwtSecret, { expiresIn: tokenLife });
       const jwtToken = `${myBearerPrefix} ${token}`;
+      //-- send token to frontend
       res.redirect(`${keys.app.clientURL}/auth/success?token=${jwtToken}`);
     } catch (err) {
-      console.error("[GET] - (/auth/google/callback):", err);
+      console.error("[GET] - (/auth/google/callback):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -339,11 +343,11 @@ router.get(
       const payload = {
         id: req.user.id
       };
-      const token = jwt.sign(payload, secret, { expiresIn: tokenLife });
+      const token = jwt.sign(payload, jwtSecret, { expiresIn: tokenLife });
       const jwtToken = `${myBearerPrefix} ${token}`;
       res.redirect(`${keys.app.clientURL}/auth/success?token=${jwtToken}`);
     } catch (err) {
-      console.error("[GET] - (/auth/apple/callback):", err);
+      console.error("[GET] - (/auth/apple/callback):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });

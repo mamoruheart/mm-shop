@@ -50,8 +50,9 @@ export const fetchStoreBrands = () => {
         type: FETCH_STORE_BRANDS,
         payload: response.data.brands
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchStoreBrands:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -67,8 +68,9 @@ export const fetchBrands = () => {
         type: FETCH_BRANDS,
         payload: response.data.brands
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchBrands:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch({ type: SET_BRANDS_LOADING, payload: false });
     }
@@ -84,8 +86,9 @@ export const fetchBrand = (brandId) => {
         type: FETCH_BRAND,
         payload: response.data.brand
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchBrand:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -101,8 +104,9 @@ export const fetchBrandsSelect = () => {
         type: FETCH_BRANDS_SELECT,
         payload: formattedBrands
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchBrandsSelect:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -145,8 +149,9 @@ export const addBrand = () => {
         dispatch(goBack());
         dispatch({ type: RESET_BRAND });
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("addBrand:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -196,8 +201,9 @@ export const updateBrand = () => {
 
         dispatch(goBack());
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("updateBrand:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -223,8 +229,9 @@ export const activateBrand = (id, value) => {
         const brand = getState().brand.brand;
         dispatch(fetchBrand(brand._id));
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("activateBrand:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -248,8 +255,9 @@ export const deleteBrand = (id) => {
         });
         dispatch(goBack());
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("deleteBrand:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };

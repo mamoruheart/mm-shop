@@ -43,7 +43,7 @@ router.get("/item/:slug", async (req, res) => {
       product: productDoc
     });
   } catch (err) {
-    console.error("[GET] - (/product/item/:slug):", err);
+    console.error("[GET] - (/product/item/:slug):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -69,7 +69,7 @@ router.get("/list/search/:name", async (req, res) => {
       products: productDoc
     });
   } catch (err) {
-    console.error("[GET] - (/product/list/search/:name):", err);
+    console.error("[GET] - (/product/list/search/:name):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -152,7 +152,7 @@ router.get("/list", async (req, res) => {
       count
     });
   } catch (err) {
-    console.error("[GET] - (/product/list):", err);
+    console.error("[GET] - (/product/list):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -167,7 +167,7 @@ router.get("/list/select", auth, async (req, res) => {
       products
     });
   } catch (err) {
-    console.error("[GET] - (/product/list/select):", err);
+    console.error("[GET] - (/product/list/select):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -234,7 +234,7 @@ router.post(
         product: savedProduct
       });
     } catch (err) {
-      console.error("[POST] - (/product/add):", err);
+      console.error("[POST] - (/product/add):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -281,7 +281,7 @@ router.get(
         products
       });
     } catch (err) {
-      console.error("[GET] - (/product/):", err);
+      console.error("[GET] - (/product/):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -330,7 +330,7 @@ router.get(
         product: productDoc
       });
     } catch (err) {
-      console.error("[GET] - (/product/:id):", err);
+      console.error("[GET] - (/product/:id):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -367,7 +367,7 @@ router.put(
         message: "Product has been updated successfully!"
       });
     } catch (err) {
-      console.error("[PUT] - (/product/:id):", err);
+      console.error("[PUT] - (/product/:id):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -394,7 +394,7 @@ router.put(
         message: "Product has been updated successfully!"
       });
     } catch (err) {
-      console.error("[PUT] - (/product/:id/active):", err);
+      console.error("[PUT] - (/product/:id/active):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });
@@ -416,7 +416,7 @@ router.delete(
         product
       });
     } catch (err) {
-      console.error("[DELETE] - (/product/delete/:id):", err);
+      console.error("[DELETE] - (/product/delete/:id):", err?.message);
       res.status(400).json({
         error: "Your request could not be processed. Please try again."
       });

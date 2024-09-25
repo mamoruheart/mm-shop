@@ -62,8 +62,9 @@ export const fetchStoreCategories = () => {
         type: FETCH_STORE_CATEGORIES,
         payload: response.data.categories
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchStoreCategories:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -78,8 +79,9 @@ export const fetchCategories = () => {
         type: FETCH_CATEGORIES,
         payload: response.data.categories
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchCategories:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch({ type: SET_CATEGORIES_LOADING, payload: false });
     }
@@ -99,8 +101,9 @@ export const fetchCategory = (id) => {
         type: FETCH_CATEGORY,
         payload: response.data.category
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchCategory:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -151,8 +154,9 @@ export const addCategory = () => {
         dispatch(resetCategory());
         dispatch(goBack());
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("addCategory:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -209,8 +213,9 @@ export const updateCategory = () => {
         dispatch(resetCategory());
         dispatch(goBack());
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("updateCategory:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -233,8 +238,9 @@ export const activateCategory = (id, value) => {
       if (response.data.success === true) {
         dispatch(success(successfulOptions));
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("activateCategory:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -258,8 +264,9 @@ export const deleteCategory = (id) => {
         });
         dispatch(goBack());
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("deleteCategory:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };

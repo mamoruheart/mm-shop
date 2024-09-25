@@ -25,6 +25,9 @@
   }
 
   .panel-title {
+    &.title-red {
+      color: $theme-primary-red !important;
+    }
     @include media-breakpoint-down(sm) {
       display: none;
     }

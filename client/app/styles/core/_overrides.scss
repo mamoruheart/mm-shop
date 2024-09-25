@@ -62,6 +62,14 @@
       -webkit-transition: $layout-transition-speed;
       transition: $layout-transition-speed;
     }
+    .fa.fa-user {
+      font-size: 1.1rem !important;
+      vertical-align: middle;
+      margin-right: 2px;
+      &:hover {
+        color: $theme-dark-gray !important;
+      }
+    }
   }
 }
 

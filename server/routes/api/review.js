@@ -23,7 +23,7 @@ router.post("/add", auth, async (req, res) => {
       review: reviewDoc
     });
   } catch (err) {
-    console.error("[POST] - (/review/add):", err);
+    console.error("[POST] - (/review/add):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -58,7 +58,7 @@ router.get("/", async (req, res) => {
       count
     });
   } catch (err) {
-    console.error("[GET] - (/review/):", err);
+    console.error("[GET] - (/review/):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -92,7 +92,7 @@ router.get("/:slug", async (req, res) => {
       reviews
     });
   } catch (err) {
-    console.error("[GET] - (/review/:slug):", err);
+    console.error("[GET] - (/review/:slug):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -114,7 +114,7 @@ router.put("/:id", async (req, res) => {
       message: "review has been updated successfully!"
     });
   } catch (err) {
-    console.error("[PUT] - (/review/:id):", err);
+    console.error("[PUT] - (/review/:id):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -140,7 +140,7 @@ router.put("/approve/:reviewId", auth, async (req, res) => {
       success: true
     });
   } catch (err) {
-    console.error("[PUT] - (/review/approve/:reviewId):", err);
+    console.error("[PUT] - (/review/approve/:reviewId):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -165,7 +165,7 @@ router.put("/reject/:reviewId", auth, async (req, res) => {
       success: true
     });
   } catch (err) {
-    console.error("[PUT] - (/review/reject/:reviewId):", err);
+    console.error("[PUT] - (/review/reject/:reviewId):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -182,7 +182,7 @@ router.delete("/delete/:id", async (req, res) => {
       review
     });
   } catch (err) {
-    console.error("[DELETE] - (/review/delete/:id):", err);
+    console.error("[DELETE] - (/review/delete/:id):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });

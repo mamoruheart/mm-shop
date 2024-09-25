@@ -47,7 +47,7 @@ router.post("/add", auth, async (req, res) => {
       order: { _id: orderDoc._id }
     });
   } catch (err) {
-    console.error("[POST] - (/order/add):", err);
+    console.error("[POST] - (/order/add):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -119,7 +119,7 @@ router.get("/search", auth, async (req, res) => {
       });
     }
   } catch (err) {
-    console.error("[GET] - (/order/search):", err);
+    console.error("[GET] - (/order/search):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -155,7 +155,7 @@ router.get("/", auth, async (req, res) => {
       count
     });
   } catch (err) {
-    console.error("[GET] - (/order/):", err);
+    console.error("[GET] - (/order/):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -194,7 +194,7 @@ router.get("/me", auth, async (req, res) => {
       count
     });
   } catch (err) {
-    console.error("[GET] - (/order/me):", err);
+    console.error("[GET] - (/order/me):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -251,7 +251,7 @@ router.get("/:orderId", auth, async (req, res) => {
       order
     });
   } catch (err) {
-    console.error("[GET] - (/order/:orderId):", err);
+    console.error("[GET] - (/order/:orderId):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -274,7 +274,7 @@ router.delete("/cancel/:orderId", auth, async (req, res) => {
       success: true
     });
   } catch (err) {
-    console.error("[DELETE] - (/order/cancel/:orderId):", err);
+    console.error("[DELETE] - (/order/cancel/:orderId):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -334,7 +334,7 @@ router.put("/status/item/:itemId", auth, async (req, res) => {
       message: "Item status has been updated successfully!"
     });
   } catch (err) {
-    console.error("[PUT] - (/order/status/item/:itemId):", err);
+    console.error("[PUT] - (/order/status/item/:itemId):", err?.message);
     res.status(400).json({
       error: "Your request could not be processed. Please try again."
     });
@@ -354,7 +354,7 @@ const increaseQuantity = (products) => {
 
     Product.bulkWrite(bulkOptions);
   } catch (err) {
-    console.error("increaseQuantity:", err);
+    console.error("increaseQuantity:", err?.message);
   }
 };
 

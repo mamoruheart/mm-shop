@@ -12,6 +12,7 @@ class AuthSuccess extends React.PureComponent {
     const jwtCookie = tokenParam
       .slice(tokenParam.indexOf("=") + 1)
       .replace("%20", " ");
+
     if (jwtCookie) {
       setToken(jwtCookie);
       localStorage.setItem("token", jwtCookie);

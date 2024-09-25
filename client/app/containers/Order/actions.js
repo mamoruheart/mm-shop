@@ -53,9 +53,10 @@ export const fetchOrders = (page = 1) => {
         type: SET_ADVANCED_FILTERS,
         payload: { totalPages, currentPage, count }
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("fetchOrders:", err?.message);
       dispatch(clearOrders());
-      handleError(error, dispatch);
+      handleError(err, dispatch);
     } finally {
       dispatch(setOrderLoading(false));
     }
@@ -85,9 +86,10 @@ export const fetchAccountOrders = (page = 1) => {
         type: SET_ADVANCED_FILTERS,
         payload: { totalPages, currentPage, count }
       });
-    } catch (error) {
+    } catch (err) {
+      console.error("fetchAccountOrders:", err?.message);
       dispatch(clearOrders());
-      handleError(error, dispatch);
+      handleError(err, dispatch);
     } finally {
       dispatch(setOrderLoading(false));
     }
@@ -109,8 +111,9 @@ export const searchOrders = (filter) => {
         type: FETCH_SEARCHED_ORDERS,
         payload: response.data.orders
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("searchOrders:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch(setOrderLoading(false));
     }
@@ -130,8 +133,9 @@ export const fetchOrder = (id, withLoading = true) => {
         type: FETCH_ORDER,
         payload: response.data.order
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchOrder:", err?.message);
+      handleError(err, dispatch);
     } finally {
       if (withLoading) {
         dispatch(setOrderLoading(false));
@@ -148,8 +152,9 @@ export const cancelOrder = () => {
       await axios.delete(`${API_URL}/order/cancel/${order._id}`);
 
       dispatch(push(`/dashboard/orders`));
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("cancelOrder:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -182,8 +187,9 @@ export const updateOrderItemStatus = (itemId, status) => {
       };
 
       dispatch(success(successfulOptions));
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("updateOrderItemStatus:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -203,8 +209,9 @@ export const addOrder = () => {
         dispatch(push(`/order/success/${response.data.order._id}`));
         dispatch(clearCart());
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("addOrder:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };

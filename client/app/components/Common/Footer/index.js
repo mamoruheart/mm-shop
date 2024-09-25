@@ -72,13 +72,21 @@ const Footer = () => {
         </div>
         <ul className="footer-social-item">
           <li>
-            <a href="/#facebook" rel="noreferrer noopener" target="_blank">
-              <span className="facebook-icon" />
+            <a
+              href="https://www.facebook.com/MichaelsMachines"
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              <span className="facebook-icon" title="Facebook" />
             </a>
           </li>
           <li>
-            <a href="/#twitter" rel="noreferrer noopener" target="_blank">
-              <span className="twitter-icon" />
+            <a
+              href="https://twitter.com/MichaelsMachines"
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              <span className="twitterx-icon" title="X (Twitter)" />
             </a>
           </li>
         </ul>
