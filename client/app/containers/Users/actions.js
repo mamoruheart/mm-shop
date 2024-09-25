@@ -37,8 +37,9 @@ export const fetchUsers = (page) => {
         type: SET_ADVANCED_FILTERS,
         payload: { totalPages, currentPage, count }
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchUsers:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch(setUserLoading(false));
     }
@@ -57,8 +58,9 @@ export const searchUsers = (filter) => {
       });
 
       dispatch({ type: FETCH_SEARCHED_USERS, payload: response.data.users });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("searchUsers:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch(setUserLoading(false));
     }

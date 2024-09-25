@@ -104,8 +104,9 @@ export const filterProducts = (n, v) => {
         type: SET_ADVANCED_FILTERS,
         payload: newPayload
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("filterProducts:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch(setProductLoading(false));
     }
@@ -114,9 +115,8 @@ export const filterProducts = (n, v) => {
 
 export const fetchStoreProduct = (slug) => {
   return async (dispatch, getState) => {
-    dispatch(setProductLoading(true));
-
     try {
+      dispatch(setProductLoading(true));
       const response = await axios.get(`${API_URL}/product/item/${slug}`);
 
       const inventory = response.data.product.quantity;
@@ -126,8 +126,9 @@ export const fetchStoreProduct = (slug) => {
         type: FETCH_STORE_PRODUCT,
         payload: product
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchStoreProduct:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch(setProductLoading(false));
     }
@@ -145,8 +146,9 @@ export const fetchProductsSelect = () => {
         type: FETCH_PRODUCTS_SELECT,
         payload: formattedProducts
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchProductsSelect:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -162,8 +164,9 @@ export const fetchProducts = () => {
         type: FETCH_PRODUCTS,
         payload: response.data.products
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchProducts:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch(setProductLoading(false));
     }
@@ -193,8 +196,9 @@ export const fetchProduct = (id) => {
         type: FETCH_PRODUCT,
         payload: product
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchProduct:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -286,8 +290,9 @@ export const addProduct = () => {
         dispatch(resetProduct());
         dispatch(goBack());
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("addProduct:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -357,11 +362,11 @@ export const updateProduct = () => {
 
       if (response.data.success === true) {
         dispatch(success(successfulOptions));
-
         // dispatch(goBack());
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("updateProduct:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -384,8 +389,9 @@ export const activateProduct = (id, value) => {
       if (response.data.success === true) {
         dispatch(success(successfulOptions));
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("activateProduct:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -409,8 +415,9 @@ export const deleteProduct = (id) => {
         });
         dispatch(goBack());
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("deleteProduct:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };

@@ -32,8 +32,9 @@ export const updateWishlist = (isLiked, productId) => {
         };
         dispatch(warning(retryOptions));
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("updateWishlist:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -46,8 +47,9 @@ export const fetchWishlist = () => {
       const response = await axios.get(`${API_URL}/wishlist`);
 
       dispatch({ type: FETCH_WISHLIST, payload: response.data.wishlist });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchWishlist:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch({ type: SET_WISHLIST_LOADING, payload: false });
     }

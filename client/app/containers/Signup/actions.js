@@ -78,9 +78,10 @@ export const signUp = () => {
       dispatch(setAuth());
       dispatch(success(successfulOptions));
       dispatch({ type: SIGNUP_RESET });
-    } catch (error) {
-      const title = `Please try to signup again!`;
-      handleError(error, dispatch, title);
+    } catch (err) {
+      console.error("signUp:", err?.message);
+      const title = "Please try to signup again!";
+      handleError(err, dispatch, title);
     } finally {
       dispatch({ type: SET_SIGNUP_SUBMITTING, payload: false });
       dispatch({ type: SET_SIGNUP_LOADING, payload: false });

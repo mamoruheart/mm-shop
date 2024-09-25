@@ -53,8 +53,9 @@ export const contactUs = () => {
 
       dispatch({ type: CONTACT_FORM_RESET });
       dispatch(success(successfulOptions));
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("contactUs:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };

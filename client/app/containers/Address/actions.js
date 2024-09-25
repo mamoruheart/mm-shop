@@ -59,8 +59,9 @@ export const fetchAddresses = () => {
       dispatch(setAddressLoading(true));
       const response = await axios.get(`${API_URL}/address`);
       dispatch({ type: FETCH_ADDRESSES, payload: response.data.addresses });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchAddresses:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch(setAddressLoading(false));
     }
@@ -76,8 +77,9 @@ export const fetchAddress = (addressId) => {
         type: FETCH_ADDRESS,
         payload: response.data.address
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchAddress:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -130,8 +132,9 @@ export const addAddress = () => {
         dispatch(goBack());
         dispatch({ type: RESET_ADDRESS });
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("addAddress:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -179,8 +182,9 @@ export const updateAddress = () => {
         dispatch(success(successfulOptions));
         dispatch(goBack());
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("updateAddress:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -204,8 +208,9 @@ export const deleteAddress = (id) => {
         });
         dispatch(goBack());
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("deleteAddress:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };

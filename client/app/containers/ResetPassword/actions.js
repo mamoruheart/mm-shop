@@ -61,9 +61,10 @@ export const resetPassword = (token) => {
 
       dispatch(success(successfulOptions));
       dispatch({ type: RESET_PASSWORD_RESET });
-    } catch (error) {
-      const title = `Please try to reset again!`;
-      handleError(error, dispatch, title);
+    } catch (err) {
+      console.error("resetPassword:", err?.message);
+      const title = "Please try to reset again!";
+      handleError(err, dispatch, title);
     }
   };
 };
@@ -105,9 +106,10 @@ export const resetAccountPassword = () => {
 
       dispatch(success(successfulOptions));
       dispatch({ type: RESET_PASSWORD_RESET });
-    } catch (error) {
-      const title = `Please try to reset again!`;
-      handleError(error, dispatch, title);
+    } catch (err) {
+      console.error("resetAccountPassword:", err?.message);
+      const title = "Please try to reset again!";
+      handleError(err, dispatch, title);
     }
   };
 };

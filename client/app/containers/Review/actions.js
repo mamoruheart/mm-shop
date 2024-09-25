@@ -44,8 +44,9 @@ export const fetchReviews = (n, v) => {
         type: SET_ADVANCED_FILTERS,
         payload: { totalPages, currentPage, count }
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchReviews:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch({ type: SET_REVIEWS_LOADING, payload: false });
     }
@@ -58,8 +59,9 @@ export const approveReview = (review) => {
       await axios.put(`${API_URL}/review/approve/${review._id}`);
 
       dispatch(fetchReviews());
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("approveReview:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -70,8 +72,9 @@ export const rejectReview = (review) => {
       await axios.put(`${API_URL}/review/reject/${review._id}`);
 
       dispatch(fetchReviews());
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("rejectReview:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -94,8 +97,9 @@ export const deleteReview = (id) => {
           payload: id
         });
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("deleteReview:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -120,8 +124,9 @@ export const fetchProductReviews = (slug) => {
           }
         }
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchProductReviews:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -182,8 +187,9 @@ export const addProductReview = () => {
         // });
         dispatch({ type: RESET_REVIEW });
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("addProductReview:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -207,22 +213,18 @@ export const getProductReviewsSummary = (reviews) => {
         case 4:
           ratingSummary[1][4] += 1;
           totalSummary += 1;
-
           break;
         case 3:
           ratingSummary[2][3] += 1;
           totalSummary += 1;
-
           break;
         case 2:
           ratingSummary[3][2] += 1;
           totalSummary += 1;
-
           break;
         case 1:
           ratingSummary[4][1] += 1;
           totalSummary += 1;
-
           break;
         default:
           0;

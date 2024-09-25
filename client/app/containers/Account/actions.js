@@ -40,8 +40,9 @@ export const fetchProfile = () => {
       const response = await axios.get(`${API_URL}/user/me`);
 
       dispatch({ type: FETCH_PROFILE, payload: response.data.user });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchProfile:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch(setProfileLoading(false));
     }
@@ -50,9 +51,8 @@ export const fetchProfile = () => {
 
 export const updateProfile = () => {
   return async (dispatch, getState) => {
-    const profile = getState().account.user;
-
     try {
+      const profile = getState().account.user;
       const response = await axios.put(`${API_URL}/user`, {
         profile
       });
@@ -66,8 +66,9 @@ export const updateProfile = () => {
       dispatch({ type: FETCH_PROFILE, payload: response.data.user });
 
       dispatch(success(successfulOptions));
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("updateProfile:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };

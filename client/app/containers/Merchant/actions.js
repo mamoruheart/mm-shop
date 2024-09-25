@@ -101,8 +101,9 @@ export const addMerchant = (isBack = false) => {
         dispatch({ type: RESET_MERCHANT });
         if (isBack) dispatch(goBack());
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("addMerchant:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch(setMerchantSubmitting(false));
       dispatch(setMerchantLoading(false));
@@ -133,8 +134,9 @@ export const fetchMerchants = (n, v) => {
         type: SET_ADVANCED_FILTERS,
         payload: { totalPages, currentPage, count }
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("fetchMerchants:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch(setMerchantLoading(false));
     }
@@ -156,8 +158,9 @@ export const searchMerchants = (filter) => {
         type: FETCH_SEARCHED_MERCHANTS,
         payload: response.data.merchants
       });
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("searchMerchants:", err?.message);
+      handleError(err, dispatch);
     } finally {
       dispatch(setMerchantLoading(false));
     }
@@ -178,8 +181,9 @@ export const disableMerchant = (merchant, value, search, page) => {
         return dispatch(searchMerchants({ name: "merchant", value: search }));
       }
       dispatch(fetchMerchants("merchant", page));
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("disableMerchant:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -194,8 +198,9 @@ export const approveMerchant = (merchant, search, page) => {
         return dispatch(searchMerchants({ name: "merchant", value: search }));
       }
       dispatch(fetchMerchants("merchant", page));
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("approveMerchant:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -210,8 +215,9 @@ export const rejectMerchant = (merchant, search, page) => {
         return dispatch(searchMerchants({ name: "merchant", value: search }));
       }
       dispatch(fetchMerchants("merchant", page));
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("rejectMerchant:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
@@ -251,9 +257,10 @@ export const merchantSignUp = (token) => {
       dispatch(success(successfulOptions));
       dispatch(push("/login"));
       dispatch({ type: SIGNUP_RESET });
-    } catch (error) {
+    } catch (err) {
+      console.error("merchantSignUp:", err?.message);
       const title = `Please try to signup again!`;
-      handleError(error, dispatch, title);
+      handleError(err, dispatch, title);
     }
   };
 };
@@ -286,8 +293,9 @@ export const deleteMerchant = (merchant, search, page) => {
         //   payload: merchant._id
         // });
       }
-    } catch (error) {
-      handleError(error, dispatch);
+    } catch (err) {
+      console.error("deleteMerchant:", err?.message);
+      handleError(err, dispatch);
     }
   };
 };
