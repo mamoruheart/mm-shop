@@ -40,7 +40,7 @@ myPassport(app);
 
 app.use(routes);
 
-if (clientURL.indexOf("localhost") === -1) {
+if (!clientURL.includes("localhost")) {
   app.use(express.static(path.resolve(__dirname, "..", "client", "dist")));
   app.get("/*", (_req, res) => {
     res.sendFile(path.resolve(__dirname, "..", "client", "dist", "index.html"));
