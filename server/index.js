@@ -2,10 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const chalk = require("chalk");
 const session = require("express-session");
-const dotenv = require("dotenv");
 const path = require("path");
+const dotenv = require("dotenv");
 dotenv.config({
-  path: path.resolve(__dirname, ".env")
+  /**
+   * @value .env.DEV | .env.TEST
+   * @desc Toggle value by Git branch
+   */
+  path: path.resolve(__dirname, ".env.DEV")
 });
 
 const keys = require("./config/keys");
@@ -16,6 +20,7 @@ const myPassport = require("./config/passport");
 
 const { port } = keys;
 const { sessSecret } = keys.jwt;
+const { clientURL } = keys.app;
 
 const app = express();
 
@@ -34,6 +39,13 @@ setupDB();
 myPassport(app);
 
 app.use(routes);
+
+if (clientURL.indexOf("localhost") === -1) {
+  app.use(express.static(path.resolve(__dirname, "..", "client", "dist")));
+  app.get("/*", (_req, res) => {
+    res.sendFile(path.resolve(__dirname, "..", "client", "dist", "index.html"));
+  });
+}
 
 const server = app.listen(port, () => {
   console.log(

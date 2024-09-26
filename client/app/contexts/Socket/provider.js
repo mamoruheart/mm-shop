@@ -9,6 +9,7 @@ const SocketProvider = ({ children }) => {
 
   const connect = () => {
     const token = localStorage.getItem("token");
+    console.log("SocketProvider [SOCKET_URL]:", SOCKET_URL);
     const sk = io(SOCKET_URL, {
       autoConnect: false
     });
