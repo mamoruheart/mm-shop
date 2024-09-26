@@ -9,7 +9,7 @@ dotenv.config({
    * @value .env.DEV | .env.TEST
    * @desc Toggle value by Git branch
    */
-  path: path.resolve(__dirname, ".env.DEV")
+  path: path.resolve(__dirname, ".env.TEST")
 });
 
 const keys = require("./config/keys");
