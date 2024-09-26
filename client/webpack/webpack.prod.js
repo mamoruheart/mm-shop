@@ -145,7 +145,7 @@ const config = {
       background_color: "#fff",
       theme_color: "#4a68aa",
       inject: true,
-      ios: true,
+      ios: false,
       icons: [
         {
           src: path.resolve("public/images/pwa.png"),

@@ -2,7 +2,6 @@ module.exports = {
   app: {
     name: "Michael’s Machines",
     apiURL: process.env.BASE_API_URL,
-    //-- Toggle value by Git branch
     clientURL: process.env.CLIENT_URL
   },
   port: process.env.PORT || 3000,
@@ -27,14 +26,12 @@ module.exports = {
   google: {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    //-- Toggle value by Git branch
     callbackURL: process.env.GOOGLE_CALLBACK_URL
   },
   apple: {
     clientID: process.env.APPLE_CLIENT_ID,
     teamID: process.env.APPLE_TEAM_ID,
     keyID: process.env.APPLE_KEY_ID,
-    //-- Toggle value by Git branch
     callbackURL: process.env.APPLE_CALLBACK_URL
   },
   aws: {
