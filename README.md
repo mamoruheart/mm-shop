@@ -43,6 +43,8 @@ $ docker-compose build
 $ docker-compose up
 ```
 
+> #### We Don't Use Docker here ! ! !
+
 ### Database Seed
 
 - The seed command will create an **admin** user in the database

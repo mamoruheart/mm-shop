@@ -9,8 +9,10 @@ dist
 package.json.bak
 .DS_Store
 
-## config file
+## dotenv config file
 .env
+.env.DEV
+.env.TEST
 
 ## debug
 npm-debug.log*
@@ -18,7 +20,7 @@ yarn-debug.log*
 yarn-error.log* 
 
 ### Google Auth (OAuth2.0)
-client_secret.apps.googleusercontent.com.json
+client_secret.apps.googleuc.com.*.json
 
 ### Apple Auth
-*.p8
+AuthKey.*.p8

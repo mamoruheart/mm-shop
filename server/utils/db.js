@@ -1,10 +1,9 @@
 const chalk = require("chalk");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 const path = require("path");
-
+const dotenv = require("dotenv");
 dotenv.config({
-  path: path.resolve(__dirname, "..", ".env")
+  path: path.resolve(__dirname, "..", ".env.DEV")
 });
 
 const keys = require("../config/keys");

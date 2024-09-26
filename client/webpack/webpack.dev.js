@@ -68,6 +68,7 @@ const config = {
     })
   ],
   devServer: {
+    host: "localhost",
     port: 8080,
     open: true,
     inline: true,
