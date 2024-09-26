@@ -1,3 +1,7 @@
+/**
+ * @value API_URL_DEV | API_URL
+ * @desc Toggle value by Git branch
+ */
 export const API_URL = process.env.API_URL;
 
 export const SOCKET_URL =

@@ -107,9 +107,21 @@ Refer to [package.json](package.json):
     "postinstall": "npm-run-all --parallel install:*",
     "install:client": "cd client && npm install",
     "install:server": "cd server && npm install",
+    "prestart": "cd client && npm run build",
+    "start": "cd server && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
 
+```
+
+### Start Staging Server
+
+```bash
+# install dependencies
+$ npm install
+
+# run server
+$ npm start
 ```
 
 &copy; 2014 - 2024 Michael's Machines, All Right Reserved.
