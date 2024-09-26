@@ -2,7 +2,7 @@ module.exports = {
   app: {
     name: "Michael’s Machines",
     apiURL: process.env.BASE_API_URL,
-    clientURL: process.env.CLIENT_URL
+    clientURL: process.env.CLIENT_URL || ""
   },
   port: process.env.PORT || 3000,
   database: {
