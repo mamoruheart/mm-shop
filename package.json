@@ -10,6 +10,8 @@
     "postinstall": "npm-run-all --parallel install:*",
     "install:client": "cd client && npm install",
     "install:server": "cd server && npm install",
+    "prestart": "cd client && npm run build",
+    "start": "cd server && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
