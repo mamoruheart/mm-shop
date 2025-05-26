@@ -2,6 +2,8 @@
 
 > MM Shop
 
+<img src="logo_mm.jpg" alt="Michael's Machines" width="100" height="auto" />
+
 ## Description
 
 **MM Shop** e-commerce store built with `MERN` stack, and utilized 3rd-party APIs.
@@ -123,5 +125,9 @@ $ npm install
 # run server
 $ npm start
 ```
+
+![Michael's Machines](logo_mm_names.gif)
+
+---
 
 &copy; 2014 - 2024 Michael's Machines, All Right Reserved.
